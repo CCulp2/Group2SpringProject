@@ -17,4 +17,11 @@ public class FakeCustomerDataAccessService implements CustomerDao{
         DB.add(new Customer(id, customer.getName()));
         return 1;
     }
+
+    @Override
+    public List<Customer> selectAllCustomers() {
+        return DB;
+    }
+
+
 }
