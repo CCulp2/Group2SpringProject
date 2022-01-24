@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.Customer;
 
 import java.util.UUID;
+import java.util.List;
 
 public interface CustomerDao {
     int insertCustomer(UUID id, Customer customer);
@@ -13,4 +14,5 @@ public interface CustomerDao {
     }
 
 
+    List<Customer> selectAllCustomers();
 }
