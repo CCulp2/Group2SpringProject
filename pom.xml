@@ -13,15 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CapstoneProject</name>
 	<description>Project for Capstone class</description>
-
-
-
-
-
-
-
-
-	
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -42,16 +33,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-
-
-
-
-
-
-
-
-
 	<build>
 		<plugins>
 			<plugin>
