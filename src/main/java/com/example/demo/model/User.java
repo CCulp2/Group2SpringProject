@@ -1,23 +1,28 @@
 package com.example.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class User implements UserDetails {
 
-    protected Long id;
-    protected String username;
-    protected String email;
-    protected String password;
-    protected Boolean unlocked;
+    private Long id;
+    private String username;
+    private String email;
+    private String password;
+    private Boolean unlocked;
+    private UserRole role;
+
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        SimpleGrantedAuthority auth = new SimpleGrantedAuthority(role.name());
+        return Collections.singletonList(auth);
     }
 
     @Override
@@ -42,7 +47,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
