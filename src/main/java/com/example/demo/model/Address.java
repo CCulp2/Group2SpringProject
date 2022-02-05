@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.io.IOException;
+
 public class Address {
     private int id;
     private int houseNumber;
@@ -53,8 +55,16 @@ public class Address {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
+    public void setZipcode(int zipcode) throws IOException {
+        if (zipcode >= 00000 && zipcode <= 99999)
+        {
+            this.zipcode = zipcode;
+        }
+        else
+        {
+            throw new IOException("Zip code out of bounds");
+        }
+
     }
 
     public String getState() {
