@@ -1,30 +1,43 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Customer;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 import com.example.demo.dao.CustomerDao;
-import org.springframework.stereotype.Service;
+import com.example.demo.model.Customer;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService {
+	
+	private final CustomerDao customerDao;
 
-    private final CustomerDao customerDao;
+	@Autowired
+	public CustomerService(@Qualifier("fakeDao") CustomerDao customerDao) {
+		this.customerDao = customerDao;
+	}
 
-    @Autowired
-    public CustomerService(@Qualifier("fakeDao") CustomerDao customerDao){
-        this.customerDao = customerDao;
-    }
+	public int addCustomer(Customer customer) {
+		return customerDao.insertCustomer(customer);
+	}
 
-    public int addCustomer(Customer customer){
+	public List<Customer> getAllCustomers() {
+		return customerDao.selectAllCustomers();
+	}
 
-        return customerDao.insertCustomer(customer);
-    }
+	public Optional<Customer> getCustomerById(UUID id) {
+		return customerDao.selectCustomerById(id);
+	}
 
-    public List<Customer> getAllCustomers(){
-        return customerDao.selectAllCustomers();
-    }
+	public int deleteCustomer(UUID id) {
+		return customerDao.deleteCustomerById(id);
+	}
 
+	public int updateCustomer(UUID id, Customer newCustomer) {
+		return customerDao.updateCustomerById(id, newCustomer);
+	}
 }
