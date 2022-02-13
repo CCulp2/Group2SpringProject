@@ -15,9 +15,9 @@ public class MYSQLDatasource {
     @Bean
     @ConfigurationProperties("app.datasource")
     public HikariDataSource hikariDataSource(){
-//        HikariConfig config = new HikariConfig();
-//        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//        config.setJdbcUrl("jdbc:hsqldb:hsql://rds-mysql-onlineshop.cfmau8cbluqk.us-east-1.rds.amazonaws.com");
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setJdbcUrl("jdbc:hsqldb:hsql://rds-mysql-onlineshop.cfmau8cbluqk.us-east-1.rds.amazonaws.com");
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 }
