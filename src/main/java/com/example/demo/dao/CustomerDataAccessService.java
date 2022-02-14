@@ -23,9 +23,6 @@ public class CustomerDataAccessService implements CustomerDao{
     public int insertCustomer(UUID id, Customer customer) {
         String sql = "insert into customers (Customer_ID, first_name, last_name, birth_date, phone, address, city, state) values(1234, 'test', 'test', '2020-1-1', 4444444444, '9999 test creek','orlando','fl');";
         jdbcTemplate.update(sql);
-
-
-
         return 0;
     }
 
@@ -37,8 +34,13 @@ public class CustomerDataAccessService implements CustomerDao{
     @Override
     public List<Customer> selectAllCustomers() {
 
-        String datbase = "idk";
-        return List.of(new Customer(UUID.randomUUID(), datbase ));
+        String sql = "select first_name from customers;";
+        List<Customer> customers = jdbcTemplate.query(sql, (resultSet, i) -> {
+            //UUID id = UUID.fromString(resultSet.getString("customer_id"));
+            String firstName = resultSet.getString("first_name");
+            return new  Customer( UUID.randomUUID(), firstName);
+        });
+        return customers;
 
     }
 
