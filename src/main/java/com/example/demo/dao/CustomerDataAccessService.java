@@ -2,8 +2,12 @@ package com.example.demo.dao;
 
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 import java.sql.Statement;
 import java.util.List;
@@ -21,11 +25,17 @@ public class CustomerDataAccessService implements CustomerDao{
 
     @Override
     public int insertCustomer(UUID id, Customer customer) {
-        String sql = "insert into customers (Customer_ID, first_name, last_name, birth_date, phone, address, city, state) values(1234, 'test', 'test', '2020-1-1', 4444444444, '9999 test creek','orlando','fl');";
+        //String idGenerator = UUID.randomUUID().toString();
+        String sql = "insert into customers (Customer_ID, first_name, last_name, birth_date, phone, address, city, state) values" +
+                "('" + id +"'" +
+                ", '" + customer.getName() +"'" +
+                ", '" + customer.getLastName() + "'" +
+                ", '" + customer.getBirthDate() + "'" +
+                ", " + customer.getPhone() + "" +
+                ", '" + customer.getAddress() + "'" +
+                ",'" + customer.getCity() + "'" +
+                ",'" + customer.getState() + "');";
         jdbcTemplate.update(sql);
-
-
-
         return 0;
     }
 
@@ -37,8 +47,19 @@ public class CustomerDataAccessService implements CustomerDao{
     @Override
     public List<Customer> selectAllCustomers() {
 
-        String datbase = "idk";
-        return List.of(new Customer(UUID.randomUUID(), datbase ));
+        String sql = "select customer_id, first_name, last_name, birth_date, phone, address, city, state from customers;";
+        List<Customer> customers = jdbcTemplate.query(sql, (resultSet, i) -> {
+            String id = resultSet.getString("customer_id");
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String birthDate = resultSet.getString("birth_date");
+            String phone = resultSet.getString("phone");
+            String address = resultSet.getString("address");
+            String city = resultSet.getString("city");
+            String state = resultSet.getString("state");
+            return new  Customer(id, firstName, lastName, birthDate, phone, address, city, state);
+        });
+        return customers;
 
     }
 
