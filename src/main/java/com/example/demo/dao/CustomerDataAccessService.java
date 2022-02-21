@@ -3,8 +3,13 @@ package com.example.demo.dao;
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -64,12 +69,25 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public Optional<Customer> selectCustomerById(UUID id) {
-        return Optional.empty();
+    public List<Customer> selectCustomerById(String id) {
+
+        String sql = "select customer_id, first_name, last_name, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
+        List<Customer> customer = jdbcTemplate.query(sql, (resultSet, i) -> {
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String birthDate = resultSet.getString("birth_date");
+            String phone = resultSet.getString("phone");
+            String address = resultSet.getString("address");
+            String city = resultSet.getString("city");
+            String state = resultSet.getString("state");
+            return new  Customer(id, firstName, lastName, birthDate, phone, address, city, state);
+        });
+        return customer;
     }
 
     @Override
     public int deleteCustomerById(UUID id) {
+        String sql = "delete from customers where customer_id = " + id + ";";
         return 0;
     }
 
