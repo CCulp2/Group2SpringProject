@@ -51,6 +51,13 @@ public class Product {
         this.quantityInStock = quantityInStock;
     }
 
+    /* NOTE: BigDecimal means that we have to use UNFORMATTED NUMBERS
+        when we pass or retrieve. This also means that formatting needs to be done
+        on the client side. For instance:
+
+        Human readable Price: $19.99
+        BigDecimal Price: 1999
+     */
     public BigDecimal getUnitPrice() {
         return unitPrice;
     }
