@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import com.example.demo.model.Customer;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerDao {
@@ -18,7 +19,7 @@ public interface CustomerDao {
 
 	Optional<Customer> selectCustomerById(UUID id);
 
-	List<Customer> deleteCustomerById(String id);
+	int deleteCustomerById(UUID id);
 
 	int updateCustomerById(UUID id, Customer customer);
 }

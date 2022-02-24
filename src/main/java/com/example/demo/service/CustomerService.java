@@ -33,7 +33,9 @@ public class CustomerService {
 		return customerDao.selectCustomerById(id);
 	}
 
-	public List<Customer> deleteCustomer(String id) { return customerDao.deleteCustomerById(id); }
+	public int deleteCustomer(UUID id) {
+		return customerDao.deleteCustomerById(id);
+	}
 
 	public int updateCustomer(UUID id, Customer newCustomer) {
 		return customerDao.updateCustomerById(id, newCustomer);

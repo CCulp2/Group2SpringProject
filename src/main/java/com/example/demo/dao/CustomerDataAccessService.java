@@ -2,14 +2,16 @@ package com.example.demo.dao;
 
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< Updated upstream
 import org.springframework.format.annotation.DateTimeFormat;
-=======
->>>>>>> Stashed changes
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.Date;
+
+import java.sql.Statement;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository("MYSQL")
@@ -67,25 +69,8 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-<<<<<<< Updated upstream
     public int deleteCustomerById(UUID id) {
         return 0;
-=======
-    public List<Customer> deleteCustomerById(String id) {
-        String sql = "delete customer_id, first_name, last_name, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
-        List<Customer> customerToDelete = selectCustomerById(id);
-//        List<Customer> customerToDelete = jdbcTemplate.query(sql, (resultSet, i) -> {
-//            String firstName = resultSet.getString("first_name");
-//            String lastName = resultSet.getString("last_name");
-//            String birthDate = resultSet.getString("birth_date");
-//            String phone = resultSet.getString("phone");
-//            String address = resultSet.getString("address");
-//            String city = resultSet.getString("city");
-//            String state = resultSet.getString("state");
-//            return new Customer(id, firstName, lastName, birthDate, phone, address, city, state);
-//        });
-        return jdbcTemplate.update(sql, customerToDelete);
->>>>>>> Stashed changes
     }
 
     @Override
