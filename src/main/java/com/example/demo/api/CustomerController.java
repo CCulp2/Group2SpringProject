@@ -46,8 +46,8 @@ public class CustomerController {
 	}
 
 	@DeleteMapping(path = "{id}")
-	public void deleteCustomerById(@PathVariable("id") UUID id) {
-		customerService.deleteCustomer(id);
+	public List<Customer> deleteCustomerById(@PathVariable("id") String id) {
+		return customerService.deleteCustomer(id);
 	}
 
 	@PutMapping(path = "{id}")
