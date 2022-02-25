@@ -1,22 +1,22 @@
 package com.example.demo.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.time;
 
 public class Order {
-  int id; 
-  ArrayList<Product> Product = new ArrayList<Product>();
-  LocalDateTime orderDate;
+  private int id;
+  private ArrayList<Product> ProductList = new ArrayList<Product>();
+  private LocalDateTime orderDate;
+
+  public Order(int id, LocalDateTime orderDate, ArrayList<Product> ProductList) {
+    this.id = id;
+    this.orderDate = LocalDateTime.now();
+    this.ProductList = ProductList;
+  }
+
+  public LocalDateTime getOrderDate() {
+    return orderDate;
+  }
+
+  
 }
-
-  public void setProduct(Product product){
-    this.product = product;
-  }
-
-  public void getProduct(){
-    return this.Product;
-  }
-
-  public void getDateTime(){
-    return this.DateTime;
-  }
