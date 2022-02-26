@@ -40,13 +40,13 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "{id}")
-	public Customer getCustomerById(@PathVariable("id") UUID id) {
-		return customerService.getCustomerById(id)
-			.orElse(null);
+	public List<Customer> getCustomerById(@PathVariable("id") UUID id) {
+		return customerService.getCustomerById(id);
+//			.orElse(null);
 	}
 
 	@DeleteMapping(path = "{id}")
-	public List<Customer> deleteCustomerById(@PathVariable("id") String id) {
+	public int deleteCustomerById(@PathVariable("id") UUID id) {
 		return customerService.deleteCustomer(id);
 	}
 
