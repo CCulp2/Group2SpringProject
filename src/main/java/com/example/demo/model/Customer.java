@@ -1,13 +1,12 @@
 package com.example.demo.model;
 
-import java.util.Date;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Customer {
 	
-	private UUID id;
+	private String id;
 	private String name;
 	private String lastName;
 	private String birthDate;
@@ -16,7 +15,7 @@ public class Customer {
 	private String city;
 	private String state;
 
-	public Customer(@JsonProperty("id") UUID id,
+	public Customer(@JsonProperty("id") String id,
 				    @JsonProperty("name") String name,
 					@JsonProperty("lastName") String lastName,
 					@JsonProperty("birthDate") String birthDate,
@@ -34,7 +33,7 @@ public class Customer {
 		this.state = state;
 	}
 
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
 

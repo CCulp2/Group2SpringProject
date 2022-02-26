@@ -29,13 +29,13 @@ public class CustomerService {
 		return customerDao.selectAllCustomers();
 	}
 
-	public List<Customer> getCustomerById(UUID id) {
+	public List<Customer> getCustomerById(String id) {
 		return customerDao.selectCustomerById(id);
 	}
 
-	public int deleteCustomer(UUID id) { return customerDao.deleteCustomerById(id); }
+	public int deleteCustomer(String id) { return customerDao.deleteCustomerById(id); }
 
-	public int updateCustomer(UUID id, Customer newCustomer) {
+	public int updateCustomer(String id, Customer newCustomer) {
 		return customerDao.updateCustomerById(id, newCustomer);
 	}
 }

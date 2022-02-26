@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+
 @Repository("MYSQL")
 public class CustomerDataAccessService implements CustomerDao{
 
@@ -20,7 +21,7 @@ public class CustomerDataAccessService implements CustomerDao{
     @Override
     public int insertCustomer(UUID id, Customer customer) {
         //String idGenerator = UUID.randomUUID().toString();
-        String sql = "insert into customers (Customer_ID, first_name, last_name, birth_date, phone, address, city, state) values" +
+        String sql = "insert into customers (customer_ID, first_name, last_name, birth_date, phone, address, city, state) values" +
                 "('" + id +"'" +
                 ", '" + customer.getName() +"'" +
                 ", '" + customer.getLastName() + "'" +
@@ -58,7 +59,7 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public List<Customer> selectCustomerById(UUID id) {
+    public List<Customer> selectCustomerById(String id) {
 
         String sql = "select customer_id, first_name, last_name, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
         List<Customer> customer = jdbcTemplate.query(sql, (resultSet, i) -> {
@@ -75,7 +76,7 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public int deleteCustomerById(UUID id) {
+    public int deleteCustomerById(String id) {
         String sql = "delete customer_id, first_name, last_name, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
         List<Customer> customerToDelete = jdbcTemplate.query(sql, (resultSet, i) -> {
             String firstName = resultSet.getString("first_name");
@@ -92,7 +93,17 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public int updateCustomerById(UUID id, Customer customer) {
+    public int updateCustomerById(String id, Customer update) {
+//        return selectCustomerById(id)
+//                .map(customer -> {
+//                    int indexOfCustomerToUpdate = DB.indexOf(customer);
+//                    if (indexOfCustomerToUpdate >= 0) {
+//                        DB.set(indexOfCustomerToUpdate, new Customer(id, update.getName()));
+//                        return 1;
+//                    }
+//                    return 0;
+//                })
+//                .orElse(0);
         return 0;
     }
 }
