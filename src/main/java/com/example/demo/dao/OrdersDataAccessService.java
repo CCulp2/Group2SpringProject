@@ -27,7 +27,14 @@ public class OrdersDataAccessService implements OrdersDao{
 
     @Override
     public int insertOrder(UUID id, Orders orders) {
+        //String idGenerator = UUID.randomUUID().toString();
+        String sql = "insert into Orders (order_id, order_date, Customers_customer_ID)  values" +
+                "('" + id +"'" +
+                ", '" + orders.getOrderDate() +"'" +
+                ", '" + orders.getCustomerID() + "');";
+        jdbcTemplate.update(sql);
         return 0;
+
     }
 
     @Override
