@@ -47,6 +47,7 @@ public class CustomerDataAccessService implements CustomerDao{
         String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers;";
         List<Customer> customers = jdbcTemplate.query(sql, (resultSet, i) -> {
             String id = resultSet.getString("customer_id");
+            UUID customerId = UUID.fromString(id);
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
             String username = resultSet.getString("username");
@@ -56,14 +57,14 @@ public class CustomerDataAccessService implements CustomerDao{
             String address = resultSet.getString("address");
             String city = resultSet.getString("city");
             String state = resultSet.getString("state");
-            return new  Customer(id, firstName, lastName, username, password, birthDate, phone, address, city, state);
+            return new  Customer(customerId, firstName, lastName, username, password, birthDate, phone, address, city, state);
         });
         return customers;
 
     }
 
     @Override
-    public List<Customer> selectCustomerById(String id) {
+    public List<Customer> selectCustomerById(UUID id) {
 
         String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
         List<Customer> customer = jdbcTemplate.query(sql, (resultSet, i) -> {
@@ -102,18 +103,18 @@ public class CustomerDataAccessService implements CustomerDao{
 //    }
 
     @Override
-    public int deleteCustomerById(String id) {
+    public int deleteCustomerById(UUID id) {
         String sql = "delete from customers where customer_id = '" + id + "';";
         jdbcTemplate.update(sql);
         return 0;
     }
 
     @Override
-    public int updateCustomerById(String id, Customer customer) {
-        String sql = "update customers " +
-                "set" + //gotta figure out how to allow the update of any field without creating a method for each one.
-                "where customer_id='" + id + "';";
-        jdbcTemplate.update(sql);
+    public int updateCustomerById(UUID id, Customer customer) {
+//        String sql = "update customers " +
+//                "set" + //gotta figure out how to allow the update of any field without creating a method for each one.
+//                "where customer_id='" + id + "';";
+//        jdbcTemplate.update(sql);
         return 0;
     }
 }

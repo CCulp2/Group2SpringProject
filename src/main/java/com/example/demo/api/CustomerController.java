@@ -40,18 +40,18 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "{id}")
-	public List<Customer> getCustomerById(@PathVariable("id") String id) {
+	public List<Customer> getCustomerById(@PathVariable("id") UUID id) {
 		return customerService.getCustomerById(id);
 //			.orElse(null);
 	}
 
 	@DeleteMapping(path = "{id}")
-	public int deleteCustomerById(@PathVariable("id") String id) {
+	public int deleteCustomerById(@PathVariable("id") UUID id) {
 		return customerService.deleteCustomer(id);
 	}
 
 	@PutMapping(path = "{id}")
-	public void updateCustomer(@PathVariable("id") String id, @RequestBody Customer customerToUpdate) {
+	public void updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customerToUpdate) {
 		customerService.updateCustomer(id, customerToUpdate);
 	}
 }

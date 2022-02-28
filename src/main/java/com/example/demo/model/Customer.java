@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Customer {
 	
-	private String id;
+	private UUID id;
 	private String name;
 	private String lastName;
 	private String username;
@@ -17,7 +17,7 @@ public class Customer {
 	private String city;
 	private String state;
 
-	public Customer(@JsonProperty("id") String id,
+	public Customer(@JsonProperty("id") UUID id,
 				    @JsonProperty("name") String name,
 					@JsonProperty("lastName") String lastName,
 					@JsonProperty("username") String username,
@@ -39,7 +39,7 @@ public class Customer {
 		this.state = state;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
