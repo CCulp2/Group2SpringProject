@@ -44,6 +44,7 @@ public class CustomerDataAccessService implements CustomerDao{
         String sql = "select customer_id, first_name, last_name, birth_date, phone, address, city, state from customers;";
         List<Customer> customers = jdbcTemplate.query(sql, (resultSet, i) -> {
             String id = resultSet.getString("customer_id");
+            UUID customerId = UUID.fromString(id);
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
             String birthDate = resultSet.getString("birth_date");
@@ -51,7 +52,7 @@ public class CustomerDataAccessService implements CustomerDao{
             String address = resultSet.getString("address");
             String city = resultSet.getString("city");
             String state = resultSet.getString("state");
-            return new  Customer(id, firstName, lastName, birthDate, phone, address, city, state);
+            return new  Customer(customerId, firstName, lastName, birthDate, phone, address, city, state);
         });
         return customers;
 
