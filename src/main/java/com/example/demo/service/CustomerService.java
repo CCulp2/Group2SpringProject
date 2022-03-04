@@ -35,7 +35,7 @@ public class CustomerService {
 
 	public int deleteCustomer(UUID id) { return customerDao.deleteCustomerById(id); }
 
-	public int updateCustomer(UUID id, Customer newCustomer) {
-		return customerDao.updateCustomerById(id, newCustomer);
+	public void updateCustomer(UUID id, Customer newCustomer) {
+		customerDao.updateCustomerById(id, newCustomer);
 	}
 }

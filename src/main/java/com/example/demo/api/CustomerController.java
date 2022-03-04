@@ -3,6 +3,7 @@ package com.example.demo.api;
 import com.example.demo.service.CustomerService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.example.demo.model.Customer;
