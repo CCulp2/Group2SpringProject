@@ -29,7 +29,7 @@ public class OrdersService {
         return ordersDao.selectAllOrders();
     }
 
-    public Optional<Orders> getOrdersById(UUID id) {
+    public List<Orders> getOrdersById(UUID id) {
         return ordersDao.selectOrderById(id);
     }
 
@@ -37,7 +37,6 @@ public class OrdersService {
         return ordersDao.deleteOrderById(id);
     }
 
-    public int updateOrder(UUID id, Orders newOrder) {
-        return ordersDao.updateOrderById(id, newOrder);
+    public void updateOrder(UUID id, Orders newOrder) {
     }
 }

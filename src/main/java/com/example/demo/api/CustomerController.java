@@ -42,7 +42,7 @@ public class CustomerController {
 	@GetMapping(path = "{id}")
 	public List<Customer> getCustomerById(@PathVariable("id") UUID id) {
 		return customerService.getCustomerById(id);
-//			.orElse(null);
+//			.orElse(null); //This line if for when I get Optional<T> working
 	}
 
 	@DeleteMapping(path = "{id}")

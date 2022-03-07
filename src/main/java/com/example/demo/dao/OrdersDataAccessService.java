@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.Customer;
 import com.example.demo.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,7 +43,8 @@ public class OrdersDataAccessService implements OrdersDao{
 
         String sql = "select order_id, order_date, Customers_customer_id from Orders;";
         List<Orders> orders = jdbcTemplate.query(sql, (resultSet, i) -> {
-            String id = resultSet.getString("order_id");
+            String orderId = resultSet.getString("order_id");
+            UUID id = UUID.fromString(orderId);
             String orderDate = resultSet.getString("order_date");
             String CustomerID = resultSet.getString("Customers_customer_id");
             return new Orders(id, orderDate, CustomerID);
@@ -52,19 +54,33 @@ public class OrdersDataAccessService implements OrdersDao{
     }
 
     @Override
-    public Optional<Orders> selectOrderById(UUID id) {
-        return Optional.empty();
+    public List<Orders> selectOrderById(UUID id) {
+        String sql = "select order_id, order_date, Customers_customer_id from Orders where order_id = '" + id +"';";
+        List<Orders> order = jdbcTemplate.query(sql, (resultSet, i) -> {
+            String orderDate = resultSet.getString("order_date");
+            String CustomerID = resultSet.getString("Customers_customer_id");
+            return new Orders(id, orderDate, CustomerID);
+        });
+        return order;
     }
 
     @Override
     public int deleteOrderById(UUID id) {
+        String sql = "delete from Orders where order_id = '" + id + "';";
+        jdbcTemplate.update(sql);
         return 0;
     }
 
     @Override
-    public int updateOrderById(UUID id, Orders orders) {
-        return 0;
+    public void updateOrderById(UUID id, Orders order) {
+        String sql = "update Orders " +
+                "set order_id = '" + order.getOrderId() + "'" +
+                ",order_date = '" + order.getOrderDate() + "'" +
+                ",customers_customer_id = '" + order.getCustomerID() + "'" +
+                "where order_id = '" + id + "';";
+        jdbcTemplate.update(sql);
     }
-
-
 }
+
+
+

@@ -40,9 +40,9 @@ public class OrdersController {
     }
 
     @GetMapping(path = "{id}")
-    public Orders getOrdersById(@PathVariable("id") UUID id) {
-        return ordersService.getOrdersById(id)
-                .orElse(null);
+    public List<Orders> getOrdersById(@PathVariable("id") UUID id) {
+        return ordersService.getOrdersById(id);
+//                .orElse(null); //This line if for when I get Optional<T> working
     }
 
     @DeleteMapping(path = "{id}")
