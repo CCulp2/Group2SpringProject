@@ -1,24 +1,27 @@
 package com.example.demo.model;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Customer {
 	
-	private String id;
+	private UUID id;
 	private String name;
 	private String lastName;
+	private String username;
+	private String password;
 	private String birthDate;
 	private String phone;
 	private String address;
 	private String city;
 	private String state;
 
-	public Customer(@JsonProperty("id") String id,
+	public Customer(@JsonProperty("id") UUID id,
 				    @JsonProperty("name") String name,
 					@JsonProperty("lastName") String lastName,
+					@JsonProperty("username") String username,
+					@JsonProperty("password") String password,
 					@JsonProperty("birthDate") String birthDate,
 					@JsonProperty("phone") String phone,
 					@JsonProperty("address") String address,
@@ -27,6 +30,8 @@ public class Customer {
 		this.id = id;
 		this.name= name;
 		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
 		this.birthDate = birthDate;
 		this.phone = phone;
 		this.address = address;
@@ -34,7 +39,7 @@ public class Customer {
 		this.state = state;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -43,6 +48,10 @@ public class Customer {
 	}
 
 	public String getLastName() {return lastName; }
+
+	public String getUsername() {return username; }
+
+	public String getPassword() {return password; }
 
 	public String getBirthDate() {return birthDate; }
 

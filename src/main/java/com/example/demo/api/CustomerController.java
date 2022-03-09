@@ -3,6 +3,7 @@ package com.example.demo.api;
 import com.example.demo.service.CustomerService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.example.demo.model.Customer;
@@ -41,13 +42,14 @@ public class CustomerController {
 
 	@GetMapping(path = "{id}")
 	public List<Customer> getCustomerById(@PathVariable("id") String id) {
+
 		return customerService.getCustomerById(id);
 //			.orElse(null);
 	}
 
 	@DeleteMapping(path = "{id}")
-	public void deleteCustomerById(@PathVariable("id") UUID id) {
-		customerService.deleteCustomer(id);
+	public int deleteCustomerById(@PathVariable("id") UUID id) {
+		return customerService.deleteCustomer(id);
 	}
 
 	@PutMapping(path = "{id}")
