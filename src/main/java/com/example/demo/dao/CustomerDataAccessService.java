@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.dao.datasource.CustomerRowMapper;
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -45,29 +46,8 @@ public class CustomerDataAccessService implements CustomerDao{
     public List<Customer> selectAllCustomers() {
 
         String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers;";
-        List<Customer> customers = jdbcTemplate.query(sql, (resultSet, i) -> {
-            String id = resultSet.getString("customer_id");
-            UUID customerId = UUID.fromString(id);
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            String username = resultSet.getString("username");
-            String password = resultSet.getString("password");
-            String birthDate = resultSet.getString("birth_date");
-            String phone = resultSet.getString("phone");
-            String address = resultSet.getString("address");
-            String city = resultSet.getString("city");
-            String state = resultSet.getString("state");
-            return new  Customer(customerId, firstName, lastName, username, password, birthDate, phone, address, city, state);
-        });
-        return customers;
-
-    }
-
-    @Override
-    public List<Customer> selectCustomerById(UUID id) {
-
-        String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
-        List<Customer> customer = jdbcTemplate.query(sql, (resultSet, i) -> {
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            UUID id = UUID.fromString(resultSet.getString("customer_id"));
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
             String username = resultSet.getString("username");
@@ -79,7 +59,24 @@ public class CustomerDataAccessService implements CustomerDao{
             String state = resultSet.getString("state");
             return new  Customer(id, firstName, lastName, username, password, birthDate, phone, address, city, state);
         });
-        return customer;
+    }
+
+    @Override
+    public List<Customer> selectCustomerById(UUID id) {
+
+        String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
+        return jdbcTemplate.query(sql, (resultSet, i) -> {
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            String birthDate = resultSet.getString("birth_date");
+            String phone = resultSet.getString("phone");
+            String address = resultSet.getString("address");
+            String city = resultSet.getString("city");
+            String state = resultSet.getString("state");
+            return new  Customer(id, firstName, lastName, username, password, birthDate, phone, address, city, state);
+        });
     }
 //    Eventually, get the Optional part working.
 //    @Override
@@ -110,11 +107,19 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public int updateCustomerById(UUID id, Customer customer) {
-//        String sql = "update customers " +
-//                "set" + //gotta figure out how to allow the update of any field without creating a method for each one.
-//                "where customer_id='" + id + "';";
-//        jdbcTemplate.update(sql);
-        return 0;
+    public void updateCustomerById(UUID id, Customer customer) {
+        String sql = "update customers " +
+                "set first_name = '" + customer.getName() + "'" +
+                ",last_name = '" + customer.getLastName() + "'" +
+                ",username = '" + customer.getUsername() + "'" +
+                ",password = '" + customer.getPassword() + "'" +
+                ",birth_date = '" + customer.getBirthDate() + "'" +
+                ",phone = " + customer.getPhone() + "" +
+                ",address = '" + customer.getAddress() + "'" +
+                ",city = '" + customer.getCity() + "'" +
+                ",state = '" + customer.getState() + "'" +
+                "where customer_id = '" + id + "';";
+
+        jdbcTemplate.update(sql);
     }
 }
