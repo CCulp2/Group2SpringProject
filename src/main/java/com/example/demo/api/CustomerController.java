@@ -41,7 +41,8 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "{id}")
-	public List<Customer> getCustomerById(@PathVariable("id") UUID id) {
+	public List<Customer> getCustomerById(@PathVariable("id") String id) {
+
 		return customerService.getCustomerById(id);
 //			.orElse(null);
 	}

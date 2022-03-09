@@ -3,8 +3,14 @@ package com.example.demo.dao;
 import com.example.demo.dao.datasource.CustomerRowMapper;
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.UUID;
@@ -62,21 +68,24 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public List<Customer> selectCustomerById(UUID id) {
 
-        String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
-        return jdbcTemplate.query(sql, (resultSet, i) -> {
+    public List<Customer> selectCustomerById(String id) {
+
+        String sql = "select customer_id, first_name, last_name, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
+        List<Customer> customer = jdbcTemplate.query(sql, (resultSet, i) -> {
             String firstName = resultSet.getString("first_name");
             String lastName = resultSet.getString("last_name");
-            String username = resultSet.getString("username");
-            String password = resultSet.getString("password");
+
             String birthDate = resultSet.getString("birth_date");
             String phone = resultSet.getString("phone");
             String address = resultSet.getString("address");
             String city = resultSet.getString("city");
             String state = resultSet.getString("state");
-            return new  Customer(id, firstName, lastName, username, password, birthDate, phone, address, city, state);
+
+            return new  Customer(id, firstName, lastName, birthDate, phone, address, city, state);
         });
+        return customer;
+
     }
 //    Eventually, get the Optional part working.
 //    @Override
@@ -101,8 +110,9 @@ public class CustomerDataAccessService implements CustomerDao{
 
     @Override
     public int deleteCustomerById(UUID id) {
-        String sql = "delete from customers where customer_id = '" + id + "';";
-        jdbcTemplate.update(sql);
+
+        String sql = "delete from customers where customer_id = " + id + ";";
+
         return 0;
     }
 
