@@ -1,10 +1,8 @@
 package com.example.demo.api;
 
 import com.example.demo.service.OrdersService;
-
 import java.util.List;
 import java.util.UUID;
-
 import com.example.demo.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

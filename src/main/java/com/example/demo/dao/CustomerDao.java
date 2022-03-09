@@ -17,9 +17,7 @@ public interface CustomerDao {
 
 	List<Customer> selectAllCustomers();
 
-
-	List<Customer> selectCustomerById(String id);
-
+	List<Customer> selectCustomerById(UUID id);
 
 	int deleteCustomerById(UUID id);
 
