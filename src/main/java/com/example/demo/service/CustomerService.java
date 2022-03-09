@@ -29,7 +29,7 @@ public class CustomerService {
 		return customerDao.selectAllCustomers();
 	}
 
-	public List<Customer> getCustomerById(String id) {
+	public List<Customer> getCustomerById(UUID id) {
 		return customerDao.selectCustomerById(id);
 	}
 
