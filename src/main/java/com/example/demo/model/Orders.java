@@ -27,9 +27,4 @@ public class Orders {
 
     public String getCustomerID() {return customerID; }
 
-
-
-
-
-
 }
