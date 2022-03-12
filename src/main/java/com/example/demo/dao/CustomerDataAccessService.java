@@ -1,8 +1,11 @@
 package com.example.demo.dao;
 
-import com.example.demo.dao.datasource.CustomerRowMapper;
 import com.example.demo.model.Customer;
+import com.example.demo.repository.CustomerRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -14,69 +17,31 @@ import java.util.UUID;
 public class CustomerDataAccessService implements CustomerDao{
 
     private final JdbcTemplate jdbcTemplate;
+    private CustomerRepository customerRepo;
+
     @Autowired
-    public CustomerDataAccessService(JdbcTemplate jdbcTemplate) {
+    public CustomerDataAccessService(JdbcTemplate jdbcTemplate, CustomerRepository customerRepo) {
         this.jdbcTemplate = jdbcTemplate;
+        this.customerRepo = customerRepo;
     }
 
-    @Override
-    public int insertCustomer(UUID id, Customer customer) {
-        //String idGenerator = UUID.randomUUID().toString();
-        String sql = "insert into customers (customer_ID, first_name, last_name, username, password, birth_date, phone, address, city, state) values" +
-                "('" + id +"'" +
-                ", '" + customer.getName() +"'" +
-                ", '" + customer.getLastName() + "'" +
-                ", '" + customer.getUsername() + "'" +
-                ", '" + customer.getPassword() + "'" +
-                ", '" + customer.getBirthDate() + "'" +
-                ", " + customer.getPhone() + "" +
-                ", '" + customer.getAddress() + "'" +
-                ",'" + customer.getCity() + "'" +
-                ",'" + customer.getState() + "');";
-        jdbcTemplate.update(sql);
-        return 0;
-    }
 
     @Override
-    public int insertCustomer(Customer customer) {
-        return CustomerDao.super.insertCustomer(customer);
+    public ResponseEntity<Customer> insertCustomer(Customer customer) {
+        customer.setId(UUID.randomUUID());
+        customerRepo.save(customer);
+        return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
     }
 
     @Override
     public List<Customer> selectAllCustomers() {
-
-        String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers;";
-        return jdbcTemplate.query(sql, (resultSet, i) -> {
-            UUID id = UUID.fromString(resultSet.getString("customer_id"));
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            String username = resultSet.getString("username");
-            String password = resultSet.getString("password");
-            String birthDate = resultSet.getString("birth_date");
-            String phone = resultSet.getString("phone");
-            String address = resultSet.getString("address");
-            String city = resultSet.getString("city");
-            String state = resultSet.getString("state");
-            return new  Customer(id, firstName, lastName, username, password, birthDate, phone, address, city, state);
-        });
+        return customerRepo.findAll();
     }
 
     @Override
-    public List<Customer> selectCustomerById(UUID id) {
-
-        String sql = "select customer_id, first_name, last_name, username, password, birth_date, phone, address, city, state from customers where customer_id = '" + id + "';";
-        return jdbcTemplate.query(sql, (resultSet, i) -> {
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            String username = resultSet.getString("username");
-            String password = resultSet.getString("password");
-            String birthDate = resultSet.getString("birth_date");
-            String phone = resultSet.getString("phone");
-            String address = resultSet.getString("address");
-            String city = resultSet.getString("city");
-            String state = resultSet.getString("state");
-            return new  Customer(id, firstName, lastName, username, password, birthDate, phone, address, city, state);
-        });
+    public ResponseEntity<Customer> selectCustomerById(UUID id) {
+        Customer customerToReturn = customerRepo.findAllById();
+        return ResponseEntity<Customer>(customerToReturn, HttpStatus.OK);
     }
 //    Eventually, get the Optional part working.
 //    @Override
@@ -113,8 +78,6 @@ public class CustomerDataAccessService implements CustomerDao{
                 ",last_name = '" + customer.getLastName() + "'" +
                 ",username = '" + customer.getUsername() + "'" +
                 ",password = '" + customer.getPassword() + "'" +
-                ",birth_date = '" + customer.getBirthDate() + "'" +
-                ",phone = " + customer.getPhone() + "" +
                 ",address = '" + customer.getAddress() + "'" +
                 ",city = '" + customer.getCity() + "'" +
                 ",state = '" + customer.getState() + "'" +

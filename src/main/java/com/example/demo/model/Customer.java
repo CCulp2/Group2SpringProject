@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,48 +14,53 @@ public class Customer {
 
 	@Id
 	private UUID id;
-	private String name;
+	@Column(name="first_Name", nullable = false)
+	private String firstName;
+	@Column(name="last_name", nullable = false)
 	private String lastName;
+	@Column(name="username", nullable = false)
 	private String username;
+	@Column(name="password", nullable = false)
 	private String password;
-	private String birthDate;
-	private String phone;
+	@Column(name="address", nullable = false)
 	private String address;
+	@Column(name="city", nullable = false)
 	private String city;
+	@Column(name="state", nullable = false)
 	private String state;
 
-	public Customer(@JsonProperty("id") UUID id,
-				    @JsonProperty("name") String name,
-					@JsonProperty("lastName") String lastName,
-					@JsonProperty("username") String username,
-					@JsonProperty("password") String password,
-					@JsonProperty("birthDate") String birthDate,
-					@JsonProperty("phone") String phone,
-					@JsonProperty("address") String address,
-					@JsonProperty("city") String city,
-					@JsonProperty("state") String state) {
-		this.id = id;
-		this.name= name;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.birthDate = birthDate;
-		this.phone = phone;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-	}
+//	public Customer(@JsonProperty("id") UUID id,
+//				    @JsonProperty("firstName") String name,
+//					@JsonProperty("lastName") String lastName,
+//					@JsonProperty("username") String username,
+//					@JsonProperty("password") String password,
+//					@JsonProperty("birthDate") String birthDate,
+//					@JsonProperty("phone") String phone,
+//					@JsonProperty("address") String address,
+//					@JsonProperty("city") String city,
+//					@JsonProperty("state") String state) {
+//		this.id = id;
+//		this.firstName= name;
+//		this.lastName = lastName;
+//		this.username = username;
+//		this.password = password;
+//		this.address = address;
+//		this.city = city;
+//		this.state = state;
+//	}
 
 	public Customer() {
 
 	}
+
+	public void setId(UUID id) {this.id = id;}
 
 	public UUID getId() {
 		return id;
 	}
 
 	public String getName() {
-		return name;
+		return firstName;
 	}
 
 	public String getLastName() {return lastName; }
@@ -62,10 +68,6 @@ public class Customer {
 	public String getUsername() {return username; }
 
 	public String getPassword() {return password; }
-
-	public String getBirthDate() {return birthDate; }
-
-	public String getPhone() {return phone; }
 
 	public String getAddress() {return address; }
 

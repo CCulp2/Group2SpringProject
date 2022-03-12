@@ -22,7 +22,8 @@ public class CustomerService {
 	}
 
 	public int addCustomer(Customer customer) {
-		return customerDao.insertCustomer(customer);
+		customerDao.insertCustomer(customer);
+		return 0;
 	}
 
 	public List<Customer> getAllCustomers() {
