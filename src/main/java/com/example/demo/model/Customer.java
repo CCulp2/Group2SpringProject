@@ -1,11 +1,17 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
-
+@Entity
+@Table(name="customers")
 public class Customer {
-	
+
+	@Id
 	private UUID id;
 	private String name;
 	private String lastName;
@@ -37,6 +43,10 @@ public class Customer {
 		this.address = address;
 		this.city = city;
 		this.state = state;
+	}
+
+	public Customer() {
+
 	}
 
 	public UUID getId() {
