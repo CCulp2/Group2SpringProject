@@ -4,19 +4,18 @@ import com.example.demo.model.Customer;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerDao {
 
-	default ResponseEntity<Customer> insertCustomer(Customer customer) {
-		return insertCustomer(customer);
-	}
+	Customer insertCustomer(Customer customer);
 
 	List<Customer> selectAllCustomers();
 
-	ResponseEntity<Customer> selectCustomerById(UUID id);
+	Optional<Customer> selectCustomerById(UUID id);
 
-	int deleteCustomerById(UUID id);
+	void deleteCustomerById(UUID id);
 
-	void updateCustomerById(UUID id, Customer customer);
+	Customer updateCustomerById(UUID id, Customer customer);
 }

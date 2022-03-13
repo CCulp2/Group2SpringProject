@@ -1,11 +1,9 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +11,10 @@ import java.util.UUID;
 public class Customer {
 
 	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name="uuid2", strategy="uuid2")
+	@Column(name="customer_id")
+	@Type(type="uuid-char")
 	private UUID id;
 	@Column(name="first_Name", nullable = false)
 	private String firstName;
@@ -29,37 +31,41 @@ public class Customer {
 	@Column(name="state", nullable = false)
 	private String state;
 
-//	public Customer(@JsonProperty("id") UUID id,
-//				    @JsonProperty("firstName") String name,
-//					@JsonProperty("lastName") String lastName,
-//					@JsonProperty("username") String username,
-//					@JsonProperty("password") String password,
-//					@JsonProperty("birthDate") String birthDate,
-//					@JsonProperty("phone") String phone,
-//					@JsonProperty("address") String address,
-//					@JsonProperty("city") String city,
-//					@JsonProperty("state") String state) {
-//		this.id = id;
-//		this.firstName= name;
-//		this.lastName = lastName;
-//		this.username = username;
-//		this.password = password;
-//		this.address = address;
-//		this.city = city;
-//		this.state = state;
-//	}
 
 	public Customer() {
 
 	}
 
-	public void setId(UUID id) {this.id = id;}
-
 	public UUID getId() {
 		return id;
 	}
+	public void setId(UUID id) {this.id = id;}
 
-	public String getName() {
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getFirstName() {
 		return firstName;
 	}
 
