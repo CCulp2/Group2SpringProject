@@ -1,50 +1,73 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.UUID;
 
-
+@Entity
+@Table(name="customers")
 public class Customer {
-	
+
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name="uuid2", strategy = "uuid2")
+	@Column(name="customer_id")
+	@Type(type="uuid-char")
 	private UUID id;
-	private String name;
+	@Column(name="first_Name", nullable = false)
+	private String firstName;
+	@Column(name="last_name", nullable = false)
 	private String lastName;
+	@Column(name="username", nullable = false)
 	private String username;
+	@Column(name="password", nullable = false)
 	private String password;
-	private String birthDate;
-	private String phone;
+	@Column(name="address", nullable = false)
 	private String address;
+	@Column(name="city", nullable = false)
 	private String city;
+	@Column(name="state", nullable = false)
 	private String state;
 
-	public Customer(@JsonProperty("id") UUID id,
-				    @JsonProperty("name") String name,
-					@JsonProperty("lastName") String lastName,
-					@JsonProperty("username") String username,
-					@JsonProperty("password") String password,
-					@JsonProperty("birthDate") String birthDate,
-					@JsonProperty("phone") String phone,
-					@JsonProperty("address") String address,
-					@JsonProperty("city") String city,
-					@JsonProperty("state") String state) {
-		this.id = id;
-		this.name= name;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.birthDate = birthDate;
-		this.phone = phone;
-		this.address = address;
-		this.city = city;
-		this.state = state;
+
+	public Customer() {
+
 	}
+
 
 	public UUID getId() {
 		return id;
 	}
+	public void setId(UUID id) {this.id = id;}
 
-	public String getName() {
-		return name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getFirstName() {
+		return firstName;
 	}
 
 	public String getLastName() {return lastName; }
@@ -52,10 +75,6 @@ public class Customer {
 	public String getUsername() {return username; }
 
 	public String getPassword() {return password; }
-
-	public String getBirthDate() {return birthDate; }
-
-	public String getPhone() {return phone; }
 
 	public String getAddress() {return address; }
 

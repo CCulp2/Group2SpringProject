@@ -21,7 +21,7 @@ public class CustomerService {
 		this.customerDao = customerDao;
 	}
 
-	public int addCustomer(Customer customer) {
+	public Customer addCustomer(Customer customer) {
 		return customerDao.insertCustomer(customer);
 	}
 
@@ -29,13 +29,15 @@ public class CustomerService {
 		return customerDao.selectAllCustomers();
 	}
 
-	public List<Customer> getCustomerById(UUID id) {
+	public Optional<Customer> getCustomerById(UUID id) {
 		return customerDao.selectCustomerById(id);
 	}
 
-	public int deleteCustomer(UUID id) { return customerDao.deleteCustomerById(id); }
+	public void deleteCustomer(UUID id) {
+		customerDao.deleteCustomerById(id);
+	};
 
-	public void updateCustomer(UUID id, Customer newCustomer) {
-		customerDao.updateCustomerById(id, newCustomer);
+	public Customer updateCustomer(UUID id, Customer newCustomer) {
+		return customerDao.updateCustomerById(id, newCustomer);
 	}
 }

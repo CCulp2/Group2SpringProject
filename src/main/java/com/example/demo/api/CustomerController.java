@@ -27,9 +27,8 @@ public class CustomerController {
 
 	@PostMapping
 	@CrossOrigin
-	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-		customerService.addCustomer(customer);
-		return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
+	public ResponseEntity<Customer> addCustomer( @RequestBody Customer customer) {
+		return new ResponseEntity<>(customerService.addCustomer(customer), HttpStatus.CREATED);
 	}
 
 	@GetMapping
@@ -38,14 +37,13 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "{id}")
-	public List<Customer> getCustomerById(@PathVariable("id") UUID id) {
+	public Optional<Customer> getCustomerById(@PathVariable("id") UUID id) {
 		return customerService.getCustomerById(id);
-//			.orElse(null);
 	}
 
 	@DeleteMapping(path = "{id}")
-	public int deleteCustomerById(@PathVariable("id") UUID id) {
-		return customerService.deleteCustomer(id);
+	public void deleteCustomerById(@PathVariable("id") UUID id) {
+		customerService.deleteCustomer(id);
 	}
 
 	@PutMapping(path = "{id}")
