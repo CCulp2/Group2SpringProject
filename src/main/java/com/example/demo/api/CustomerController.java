@@ -28,7 +28,6 @@ public class CustomerController {
 	@PostMapping
 	@CrossOrigin
 	public ResponseEntity<Customer> addCustomer( @RequestBody Customer customer) {
-//		Customer customerToReturn = customerService.addCustomer(customer);
 		return new ResponseEntity<>(customerService.addCustomer(customer), HttpStatus.CREATED);
 	}
 
@@ -48,7 +47,9 @@ public class CustomerController {
 	}
 
 	@PutMapping(path = "{id}")
-	public void updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customerToUpdate) {
+	@CrossOrigin
+	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customerToUpdate) {
 		customerService.updateCustomer(id, customerToUpdate);
+		return new ResponseEntity<Customer>(customerToUpdate, HttpStatus.OK);
 	}
 }
