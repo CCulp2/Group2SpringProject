@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
 public enum Gender {
-    MALE,
+    MALE(1),
     FEMALE
 }
