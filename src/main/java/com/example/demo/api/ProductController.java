@@ -30,6 +30,7 @@ public class ProductController {
     }
 
     @GetMapping
+    @CrossOrigin
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
