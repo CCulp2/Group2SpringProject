@@ -17,27 +17,16 @@ public class CustomerService {
 	private final CustomerDao customerDao;
 
 	@Autowired
-	public CustomerService(@Qualifier("MYSQL") CustomerDao customerDao) {
-		this.customerDao = customerDao;
-	}
+	public CustomerService(@Qualifier("MYSQL") CustomerDao customerDao) { this.customerDao = customerDao; }
 
-	public Customer addCustomer(Customer customer) {
-		return customerDao.insertCustomer(customer);
-	}
+	public Customer addCustomer(Customer customer) { return customerDao.insertCustomer(customer); }
 
-	public List<Customer> getAllCustomers() {
-		return customerDao.selectAllCustomers();
-	}
+	public List<Customer> getAllCustomers() { return customerDao.selectAllCustomers(); }
 
-	public Optional<Customer> getCustomerById(UUID id) {
-		return customerDao.selectCustomerById(id);
-	}
+	public Optional<Customer> getCustomerById(UUID id) { return customerDao.selectCustomerById(id); }
 
-	public void deleteCustomer(UUID id) {
-		customerDao.deleteCustomerById(id);
-	};
+	public void deleteCustomer(UUID id) { customerDao.deleteCustomerById(id); }
 
-	public Customer updateCustomer(UUID id, Customer newCustomer) {
-		return customerDao.updateCustomerById(id, newCustomer);
-	}
+	public Customer updateCustomer(UUID id, Customer newCustomer) { return customerDao.updateCustomerById(id, newCustomer); }
+
 }

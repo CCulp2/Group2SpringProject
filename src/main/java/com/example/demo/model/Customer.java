@@ -32,43 +32,29 @@ public class Customer {
 	private String state;
 
 
-	public Customer() {
-
-	}
+	public Customer() { }
 
 
-	public UUID getId() {
-		return id;
-	}
+
 	public void setId(UUID id) {this.id = id;}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+	public void setFirstName(String firstName) { this.firstName = firstName; }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+	public void setLastName(String lastName) { this.lastName = lastName; }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	public void setUsername(String username) { this.username = username; }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+	public void setPassword(String password) { this.password = password; }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+	public void setAddress(String address) { this.address = address; }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+	public void setCity(String city) { this.city = city; }
 
-	public String getFirstName() {
-		return firstName;
-	}
+	public void setState(String state) { this.state = state; }
+
+	public UUID getId() { return id; }
+
+	public String getFirstName() { return firstName; }
 
 	public String getLastName() {return lastName; }
 
@@ -82,7 +68,4 @@ public class Customer {
 
 	public String getState() {return state; }
 
-
-
-	
 }

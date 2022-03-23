@@ -17,20 +17,13 @@ public class CustomerDataAccessService implements CustomerDao{
     private CustomerRepository customerRepo;
 
     @Autowired
-    public CustomerDataAccessService(CustomerRepository customerRepo) {
-        this.customerRepo = customerRepo;
-    }
-
+    public CustomerDataAccessService(CustomerRepository customerRepo) { this.customerRepo = customerRepo; }
 
     @Override
-    public Customer insertCustomer(Customer customer) {
-        return customerRepo.save(customer);
-    }
+    public Customer insertCustomer(Customer customer) { return customerRepo.save(customer); }
 
     @Override
-    public List<Customer> selectAllCustomers() {
-        return customerRepo.findAll();
-    }
+    public List<Customer> selectAllCustomers() { return customerRepo.findAll(); }
 
     @Override
     public Optional<Customer> selectCustomerById(UUID id) {
@@ -39,15 +32,14 @@ public class CustomerDataAccessService implements CustomerDao{
     }
 
     @Override
-    public void deleteCustomerById(UUID id) {
-        customerRepo.deleteAllById(Collections.singleton(id));
-    }
+    public void deleteCustomerById(UUID id) { customerRepo.deleteAllById(Collections.singleton(id)); }
 
     @Override
     public Customer updateCustomerById(UUID id, Customer customer) {
         Customer customerToUpdate = customerRepo.getById(id);
         customerToUpdate.setFirstName(customer.getFirstName());
         customerToUpdate.setLastName(customer.getLastName());
+        customerToUpdate.setUsername(customer.getUsername());
         customerToUpdate.setAddress(customer.getAddress());
         customerToUpdate.setCity(customer.getCity());
         customerToUpdate.setState(customer.getState());

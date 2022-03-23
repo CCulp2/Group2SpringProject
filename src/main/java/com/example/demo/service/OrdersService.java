@@ -3,8 +3,10 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import com.example.demo.dao.OrdersDao;
 import com.example.demo.model.Orders;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class OrdersService {
         this.ordersDao = ordersDao;
     }
 
-    public int addOrder(Orders order) {
+    public Orders addOrder(Orders order) {
         return ordersDao.insertOrder(order);
     }
 
@@ -27,15 +29,15 @@ public class OrdersService {
         return ordersDao.selectAllOrders();
     }
 
-    public Optional<Orders> getOrdersById(UUID id) {
+    public Optional<Orders> getOrderById(UUID id) {
         return ordersDao.selectOrderById(id);
     }
 
-    public int deleteOrder(UUID id) {
-        return ordersDao.deleteOrderById(id);
+    public void deleteOrder(UUID id) {
+        ordersDao.deleteOrderById(id);
     }
 
-    public int updateOrder(UUID id, Orders newOrder) {
+    public Orders updateOrder(UUID id, Orders newOrder) {
         return ordersDao.updateOrderById(id, newOrder);
     }
 }
