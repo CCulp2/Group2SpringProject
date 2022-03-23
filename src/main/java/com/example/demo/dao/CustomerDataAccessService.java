@@ -12,7 +12,7 @@ import java.util.UUID;
 
 
 @Repository("MYSQL")
-public class CustomerDataAccessService implements CustomerDao{
+public class CustomerDataAccessService implements CustomerDao {
 
     private CustomerRepository customerRepo;
 
@@ -55,5 +55,11 @@ public class CustomerDataAccessService implements CustomerDao{
         customerRepo.save(customerToUpdate);
 
         return customerToUpdate;
+    }
+
+    @Override
+    public Customer getCustomerByUsername(String username) {
+        Customer customer = customerRepo.findByUsername(username);
+        return customer;
     }
 }

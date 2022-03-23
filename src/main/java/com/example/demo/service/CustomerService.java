@@ -1,16 +1,20 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
 import com.example.demo.dao.CustomerDao;
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService {
+public class CustomerService implements UserDetailsService {
 	
 	private final CustomerDao customerDao;
 
@@ -37,5 +41,15 @@ public class CustomerService {
 
 	public Customer updateCustomer(UUID id, Customer newCustomer) {
 		return customerDao.updateCustomerById(id, newCustomer);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Customer customer = customerDao.getCustomerByUsername(username);
+		if(customer == null) {
+			throw new UsernameNotFoundException("User not found in database");
+		}
+		Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(), authorities);
 	}
 }
