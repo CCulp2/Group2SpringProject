@@ -1,5 +1,8 @@
 package com.example.demo.security;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,10 +23,23 @@ public class CustomAuthFilter extends UsernamePasswordAuthenticationFilter {
     }
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String customerUsername = request.getParameter("username");
-        String password = request.getParameter("password");
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(customerUsername, password);
-        return authenticationManager.authenticate(authenticationToken);
+        ObjectMapper mapper = new ObjectMapper();
+        UsernamePasswordAuthenticationToken authenticationToken = null;
+        try {
+            UsernamePasswordMapper userToAuth = mapper.readValue(request.getReader(), UsernamePasswordMapper.class);
+            authenticationToken = new UsernamePasswordAuthenticationToken(userToAuth.getUsername(), userToAuth.getPassword());
+
+
+        } catch (JsonGenerationException e) {
+
+        } catch (JsonMappingException e) {
+
+        } catch (IOException e) {
+
+        } finally {
+            return authenticationManager.authenticate(authenticationToken);
+        }
+
     }
 
     @Override
