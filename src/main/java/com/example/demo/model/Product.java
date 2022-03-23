@@ -20,8 +20,8 @@ public class Product {
     @Column(name = "unit_price")
     private double unit_price;
     @Column(name = "sexcategory_sex_id")
-    @Enumerated(EnumType.ORDINAL)
-    private Gender productGender;
+    //@Enumerated(EnumType.ORDINAL)
+    private int productGender;
     @Column(name = "sizecategory_size_id")
     @Enumerated(EnumType.ORDINAL)
     private Size productSize;
@@ -64,11 +64,11 @@ public class Product {
         this.unit_price = unit_price;
     }
 
-    public Gender getProductGender() {
+    public int getProductGender() {
         return productGender;
     }
 
-    public void setProductGender(Gender productGender) {
+    public void setProductGender(int productGender) {
         this.productGender = productGender;
     }
 
