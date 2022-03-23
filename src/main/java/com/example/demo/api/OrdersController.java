@@ -29,9 +29,7 @@ public class OrdersController {
     public ResponseEntity<Orders> addOrder(@RequestBody Orders order) { return new ResponseEntity<>(ordersService.addOrder(order), HttpStatus.CREATED); }
 
     @GetMapping
-    public List<Orders> getAllOrders() {
-        return ordersService.getAllOrders();
-    }
+    public List<Orders> getAllOrders() { return ordersService.getAllOrders(); }
 
     @GetMapping(path = "{id}")
     public Optional<Orders> getOrderById(@PathVariable("id") UUID id) { return ordersService.getOrderById(id); }

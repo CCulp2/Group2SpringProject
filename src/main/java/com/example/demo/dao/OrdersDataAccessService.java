@@ -3,7 +3,6 @@ package com.example.demo.dao;
 import com.example.demo.model.Orders;
 import com.example.demo.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;

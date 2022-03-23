@@ -25,9 +25,7 @@ public class OrdersService {
         return ordersDao.insertOrder(order);
     }
 
-    public List<Orders> getAllOrders() {
-        return ordersDao.selectAllOrders();
-    }
+    public List<Orders> getAllOrders() { return ordersDao.selectAllOrders(); }
 
     public Optional<Orders> getOrderById(UUID id) {
         return ordersDao.selectOrderById(id);
