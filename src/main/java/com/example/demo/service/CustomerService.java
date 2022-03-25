@@ -11,19 +11,23 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomerService implements UserDetailsService {
 	
 	private final CustomerDao customerDao;
+	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
-	public CustomerService(@Qualifier("MYSQL") CustomerDao customerDao) {
+	public CustomerService(@Qualifier("MYSQL") CustomerDao customerDao, PasswordEncoder passwordEncoder) {
 		this.customerDao = customerDao;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public Customer addCustomer(Customer customer) {
+		customer.setPassword(passwordEncoder.encode(customer.getPassword()));
 		return customerDao.insertCustomer(customer);
 	}
 
