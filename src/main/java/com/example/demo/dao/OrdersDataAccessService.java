@@ -40,7 +40,6 @@ public class OrdersDataAccessService implements OrdersDao{
     @Override
     public Orders updateOrderById(UUID id, Orders order) {
         Orders orderToUpdate = ordersRepo.getById(id);
-        orderToUpdate.setOrderID(order.getOrderID());
         orderToUpdate.setOrderDate(order.getOrderDate());
         orderToUpdate.setCustomerID(order.getCustomerID());
         ordersRepo.save(orderToUpdate);

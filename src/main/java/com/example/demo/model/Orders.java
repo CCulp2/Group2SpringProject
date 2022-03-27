@@ -16,9 +16,9 @@ public class Orders {
     @Column(name = "order_id")
     @Type(type = "uuid-char")
     private UUID orderID;
-    @Column(name = "order_date", nullable = false)
+    @Column(name = "order_date")
     private String orderDate;
-    @Column(name = "customers_customer_id", nullable = false)
+    @Column(name = "customers_customer_id")
     private String customerID;
 
 

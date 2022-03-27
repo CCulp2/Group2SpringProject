@@ -17,5 +17,5 @@ public interface OrdersDao {
 
     void deleteOrderById(UUID id);
 
-    Orders updateOrderById(UUID id, Orders orders);
+    Orders updateOrderById(UUID id, Orders order);
 }

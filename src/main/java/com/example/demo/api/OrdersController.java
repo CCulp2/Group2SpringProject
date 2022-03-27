@@ -38,6 +38,7 @@ public class OrdersController {
     public void deleteOrderById(@PathVariable("id") UUID id) { ordersService.deleteOrder(id); }
 
     @PutMapping(path = "{id}")
+    @CrossOrigin
     public ResponseEntity<Orders> updateOrder(@PathVariable("id") UUID id, @RequestBody Orders orderToUpdate) {
         ordersService.updateOrder(id, orderToUpdate);
         return new ResponseEntity<Orders>(orderToUpdate, HttpStatus.OK);
