@@ -2,9 +2,10 @@ package com.example.demo.api;
 
 import com.example.demo.service.OrdersService;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+
 import com.example.demo.model.Orders;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,31 +26,21 @@ public class OrdersController {
 
     @PostMapping
     @CrossOrigin
-    public ResponseEntity<Orders> addOrder(@RequestBody Orders orders) {
-        ordersService.addOrder(orders);
-        return new ResponseEntity<>(orders, HttpStatus.CREATED);
-
-    }
+    public ResponseEntity<Orders> addOrder(@RequestBody Orders order) { return new ResponseEntity<>(ordersService.addOrder(order), HttpStatus.CREATED); }
 
     @GetMapping
-    public List<Orders> getAllOrders() {
-        return ordersService.getAllOrders();
-    }
+    public List<Orders> getAllOrders() { return ordersService.getAllOrders(); }
 
     @GetMapping(path = "{id}")
-    public Orders getOrdersById(@PathVariable("id") UUID id) {
-        return ordersService.getOrdersById(id)
-                .orElse(null);
-    }
+    public Optional<Orders> getOrderById(@PathVariable("id") UUID id) { return ordersService.getOrderById(id); }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<UUID> deleteOrderById(@PathVariable("id") UUID id) {
-        ordersService.deleteOrder(id);
-        return new ResponseEntity(id, HttpStatus.NO_CONTENT);
-    }
+    public void deleteOrderById(@PathVariable("id") UUID id) { ordersService.deleteOrder(id); }
 
-//    @PutMapping(path = "{id}")
-//    public void updateOrder(@PathVariable("id") UUID id, @RequestBody Orders orderToUpdate) {
-//        OrdersService.updateOrder(id, orderToUpdate);
-//    }
+    @PutMapping(path = "{id}")
+    @CrossOrigin
+    public ResponseEntity<Orders> updateOrder(@PathVariable("id") UUID id, @RequestBody Orders orderToUpdate) {
+        ordersService.updateOrder(id, orderToUpdate);
+        return new ResponseEntity<Orders>(orderToUpdate, HttpStatus.OK);
+    }
 }
