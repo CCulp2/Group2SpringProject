@@ -31,8 +31,9 @@ public class ProductController {
 
     @GetMapping
     @CrossOrigin
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping(path = "{id}")
@@ -50,5 +51,11 @@ public class ProductController {
     public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product productToUpdate) {
         productService.updateProduct(id, productToUpdate);
         return new ResponseEntity<Product>(productToUpdate, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/search")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> getProductsByGenderAndType(@RequestParam String gender, @RequestParam String type) {
+        return new ResponseEntity<>(productService.getProductByGenderAndType(gender, type), HttpStatus.OK);
     }
 }

@@ -37,4 +37,8 @@ public class ProductService {
     public Product updateProduct(int id, Product newProduct) {
         return productDao.updateProductById(id, newProduct);
     }
+
+    public List<Product> getProductByGenderAndType(String productGender, String type) {
+        return productDao.selectProductsByGenderAndType(productGender, type);
+    }
 }
