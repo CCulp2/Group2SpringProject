@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Repository("MYSQL3")
@@ -52,6 +53,8 @@ public class ProductDataAccessService implements ProductDao {
 
     @Override
     public List<Product> selectProductsByGenderAndType(String gender, String type) {
+        gender = gender.toUpperCase(Locale.ROOT);
+        type = type.toUpperCase(Locale.ROOT);
         List<Product> results = productRepository.findAllByProductGenderAndType(gender, type);
         return results;
     }
