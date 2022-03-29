@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Product {
 
     @Id
+    @GeneratedValue
     @Column(name = "product_id")
     private Integer product_id;
     @Column(name = "product_name")
@@ -24,6 +25,8 @@ public class Product {
     private String productSize;
     @Column(name = "product_img_url")
     private String product_img_url;
+    @Column(name = "description")
+    private String description;
 
     public Product() {
 
@@ -91,5 +94,13 @@ public class Product {
 
     public void setProduct_id(Integer product_id) {
         this.product_id = product_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
