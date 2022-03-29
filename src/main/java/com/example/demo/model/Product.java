@@ -13,15 +13,15 @@ public class Product {
     @Column(name = "product_name")
     private String product_name;
     @Column(name = "product_type")
-    private ProductType type;
+    private String type;
     @Column(name = "quantity_in_stock")
     private int quantity_in_stock;
     @Column(name = "unit_price")
     private double unit_price;
     @Column(name = "gender")
-    private Gender productGender;
+    private String productGender;
     @Column(name = "size")
-    private Size productSize;
+    private String productSize;
     @Column(name = "product_img_url")
     private String product_img_url;
 
@@ -37,11 +37,11 @@ public class Product {
         this.product_name = product_name;
     }
 
-    public ProductType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ProductType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -61,19 +61,19 @@ public class Product {
         this.unit_price = unit_price;
     }
 
-    public Gender getProductGender() {
+    public String getProductGender() {
         return productGender;
     }
 
-    public void setProductGender(Gender productGender) {
+    public void setProductGender(String productGender) {
         this.productGender = productGender;
     }
 
-    public Size getProductSize() {
+    public String getProductSize() {
         return productSize;
     }
 
-    public void setProductSize(Size productSize) {
+    public void setProductSize(String productSize) {
         this.productSize = productSize;
     }
 
