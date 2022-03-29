@@ -55,6 +55,12 @@ public class ProductDataAccessService implements ProductDao {
         return productToUpdate;
     }
 
+    @Override
+    public List<Product> selectProductsByGenderAndType(String gender, String type) {
+        List<Product> results = productRepository.findAllByProductGenderAndType(gender, type);
+        return results;
+    }
+
     //    @Autowired
 //    public ProductDataAccessService(JdbcTemplate jdbcTemplate) {
 //        this.jdbcTemplate = jdbcTemplate;

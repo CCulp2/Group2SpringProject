@@ -13,17 +13,14 @@ public class Product {
     @Column(name = "product_name")
     private String product_name;
     @Column(name = "product_type")
-    @Enumerated(EnumType.ORDINAL)
     private ProductType type;
     @Column(name = "quantity_in_stock")
     private int quantity_in_stock;
     @Column(name = "unit_price")
     private double unit_price;
-    @Column(name = "sexcategory_sex_id")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "gender")
     private Gender productGender;
-    @Column(name = "sizecategory_size_id")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "size")
     private Size productSize;
     @Column(name = "product_img_url")
     private String product_img_url;
