@@ -24,6 +24,11 @@ public class ProductDataAccessService implements ProductDao {
     }
 
     @Override
+    public List<Product> insertProducts(List<Product> products) {
+        return productRepository.saveAll(products);
+    }
+
+    @Override
     public List<Product> selectAllProducts() {
         return productRepository.findAll();
     }

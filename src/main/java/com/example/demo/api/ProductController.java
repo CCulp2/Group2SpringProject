@@ -2,6 +2,8 @@ package com.example.demo.api;
 
 
 import com.example.demo.service.ProductService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.example.demo.model.Product;
@@ -27,6 +29,16 @@ public class ProductController {
     @CrossOrigin
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/addMultiple")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> addProducts(@RequestBody Product[] products) {
+        List<Product> productsToAdd = new ArrayList<Product>();
+        for (Product prod : products) {
+            productsToAdd.add(prod);
+        }
+        return new ResponseEntity<List<Product>>(productService.addProducts(productsToAdd), HttpStatus.CREATED);
     }
 
     @GetMapping
