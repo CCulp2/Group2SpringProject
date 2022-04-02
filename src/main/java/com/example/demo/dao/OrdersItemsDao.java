@@ -8,18 +8,14 @@ import java.util.UUID;
 
 
 public interface OrdersItemsDao {
-    int insertOrdersItems(UUID id, OrdersItems ordersItems);
 
-    default int insertOrdersItems(OrdersItems ordersItems) {
-        UUID id = UUID.randomUUID();
-        return insertOrdersItems(id, ordersItems);
-    }
+    OrdersItems insertOrdersItems(OrdersItems ordersItems);
 
     List<OrdersItems> selectAllOrdersItems();
 
     Optional<OrdersItems> selectOrdersItemsById(UUID id);
 
-    int deleteOrdersItemsById(UUID id);
+    void deleteOrdersItemsById(UUID id);
 
-    int updateOrdersItemsById(UUID id, OrdersItems ordersItems);
+    OrdersItems updateOrdersItemsById(UUID id, OrdersItems ordersItems);
 }

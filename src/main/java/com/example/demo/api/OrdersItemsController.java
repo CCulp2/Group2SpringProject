@@ -2,17 +2,13 @@ package com.example.demo.api;
 
 import com.example.demo.service.OrdersItemsService;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import com.example.demo.model.OrdersItems;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("api/v1/ordersItems")
 @RestController
@@ -22,14 +18,11 @@ public class OrdersItemsController {
     private final OrdersItemsService ordersItemsService;
 
     @Autowired
-    public OrdersItemsController(OrdersItemsService ordersItemsService) {
-        this.ordersItemsService = ordersItemsService;
-    }
+    public OrdersItemsController(OrdersItemsService ordersItemsService) { this.ordersItemsService = ordersItemsService; }
 
     @PostMapping
-    public void addOrdersItems(@RequestBody OrdersItems ordersItems) {
-        ordersItemsService.addOrdersItems(ordersItems);
-    }
+    @CrossOrigin
+    public ResponseEntity<OrdersItems> addOrdersItems(@RequestBody OrdersItems ordersItems) { return new ResponseEntity<>(ordersItemsService.addOrdersItems(ordersItems), HttpStatus.CREATED) ; }
 
     @GetMapping
     public List<OrdersItems> getAllOrdersItems() {
@@ -37,13 +30,15 @@ public class OrdersItemsController {
     }
 
     @GetMapping(path = "{id}")
-    public OrdersItems getOrdersItemsById(@PathVariable("id") UUID id) {
-        return ordersItemsService.getOrdersItemsById(id)
-                .orElse(null);
-    }
+    public Optional getOrdersItemsById(@PathVariable("id") UUID id) { return ordersItemsService.getOrdersItemsById(id); }
 
     @DeleteMapping(path = "{id}")
-    public void deleteOrdersItemsById(@PathVariable("id") UUID id) {
-        ordersItemsService.deleteOrdersItems(id);
+    public void deleteOrdersItemsById(@PathVariable("id") UUID id) { ordersItemsService.deleteOrdersItems(id); }
+
+    @PutMapping
+    @CrossOrigin
+    public ResponseEntity<OrdersItems> updateOrder(@PathVariable("id") UUID id, @RequestBody OrdersItems orderToUpdate) {
+        ordersItemsService.updateOrdersItems(id, orderToUpdate);
+        return new ResponseEntity<OrdersItems>(orderToUpdate, HttpStatus.OK);
     }
 }

@@ -15,11 +15,9 @@ public class OrdersItemsService {
     private final OrdersItemsDao ordersItemsDao;
 
     @Autowired
-    public OrdersItemsService(@Qualifier("MYSQL2") OrdersItemsDao ordersItemsDao) {
-        this.ordersItemsDao = ordersItemsDao;
-    }
+    public OrdersItemsService(@Qualifier("MYSQL2") OrdersItemsDao ordersItemsDao) { this.ordersItemsDao = ordersItemsDao; }
 
-    public int addOrdersItems(OrdersItems ordersItems) {
+    public OrdersItems addOrdersItems(OrdersItems ordersItems) {
         return ordersItemsDao.insertOrdersItems(ordersItems);
     }
 
@@ -31,11 +29,9 @@ public class OrdersItemsService {
         return ordersItemsDao.selectOrdersItemsById(id);
     }
 
-    public int deleteOrdersItems(UUID id) {
-        return ordersItemsDao.deleteOrdersItemsById(id);
+    public void deleteOrdersItems(UUID id) {
+        ordersItemsDao.deleteOrdersItemsById(id);
     }
 
-    public int updateOrdersItems(UUID id, OrdersItems newOrdersItems) {
-        return ordersItemsDao.updateOrdersItemsById(id, newOrdersItems);
-    }
+    public OrdersItems updateOrdersItems(UUID id, OrdersItems newOrdersItems) { return ordersItemsDao.updateOrdersItemsById(id, newOrdersItems); }
 }
