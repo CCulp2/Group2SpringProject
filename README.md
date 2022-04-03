@@ -1,6 +1,13 @@
 # Group2SpringProject
 Group2 project for IT Capstone
 
+## How to run the server
+
+- In the root directory, run the following command,
+```
+mvn spring-boot:run
+```
+
 Project Description:
 
 Your group will build a full stack project that will demonstrate the skills learned in the program.  Keep in mind that to assess these skills, we created a project to meet the needs of the outcomes.  While you are always welcome to add pieces to your project, you are not allowed to remove any items required from the project. 
