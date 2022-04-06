@@ -48,6 +48,12 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/product")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> getProductsByName(@RequestParam String name) {
+        return new ResponseEntity<>(productService.getAllByProductName(name), HttpStatus.OK);
+    }
+
     @GetMapping(path = "{id}")
     public Optional<Product> getProductById(@PathVariable("id") int id) {
         return productService.getProductById(id);

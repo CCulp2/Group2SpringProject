@@ -66,4 +66,9 @@ public class ProductDataAccessService implements ProductDao {
         return results;
     }
 
+    @Override
+    public List<Product> selectProductsByName(String product_Name) {
+        return productRepository.findAllByName(product_Name);
+    }
+
 }

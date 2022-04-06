@@ -12,7 +12,7 @@ public class Product {
     @Column(name = "product_id")
     private Integer product_id;
     @Column(name = "product_name")
-    private String product_name;
+    private String name;
     @Column(name = "product_type")
     private String type;
     @Column(name = "quantity_in_stock")
@@ -33,11 +33,11 @@ public class Product {
     }
 
     public String getProduct_name() {
-        return product_name;
+        return name;
     }
 
     public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+        this.name = product_name;
     }
 
     public String getType() {
