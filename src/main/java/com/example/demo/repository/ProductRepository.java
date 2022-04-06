@@ -10,6 +10,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
      List<Product> findAllByProductGenderAndType(String productGender, String type);
-     List<Product> findDistinctByProduct_name();
-     List<Product> findProductByProduct_name(String productName);
+     List<Product> findAllByName(String product_Name);
 }

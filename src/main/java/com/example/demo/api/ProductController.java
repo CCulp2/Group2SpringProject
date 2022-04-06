@@ -48,13 +48,6 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/display")
-    @CrossOrigin
-    public ResponseEntity<List<Product>> getDistinctProducts() {
-        List<Product> products = productService.getDistinctProductNames();
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
-
     @GetMapping(path = "/product")
     @CrossOrigin
     public ResponseEntity<List<Product>> getProductsByName(@RequestParam String name) {

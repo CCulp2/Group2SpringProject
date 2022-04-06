@@ -21,7 +21,5 @@ public interface ProductDao {
 
     List<Product> selectProductsByGenderAndType(String gender, String type);
 
-    List<Product> selectOneOfEachProduct();
-
-    List<Product> selectProductsByProductName(String productName);
+    List<Product> selectProductsByName(String product_name);
 }
