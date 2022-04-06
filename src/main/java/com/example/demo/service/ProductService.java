@@ -45,4 +45,12 @@ public class ProductService {
     public List<Product> getProductByGenderAndType(String productGender, String type) {
         return productDao.selectProductsByGenderAndType(productGender, type);
     }
+
+    public List<Product> getDistinctProductNames() {
+        return productDao.selectOneOfEachProduct();
+    }
+
+    public List<Product> getAllByProductName(String productName) {
+        return productDao.selectProductsByProductName(productName);
+    }
 }

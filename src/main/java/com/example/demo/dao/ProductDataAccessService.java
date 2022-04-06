@@ -66,4 +66,14 @@ public class ProductDataAccessService implements ProductDao {
         return results;
     }
 
+    @Override
+    public List<Product> selectOneOfEachProduct() {
+        return productRepository.findDistinctByProduct_name();
+    }
+
+    @Override
+    public List<Product> selectProductsByProductName(String productName) {
+        return productRepository.findProductByProduct_name(productName);
+    }
+
 }

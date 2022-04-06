@@ -20,4 +20,8 @@ public interface ProductDao {
     Product updateProductById(int id, Product product);
 
     List<Product> selectProductsByGenderAndType(String gender, String type);
+
+    List<Product> selectOneOfEachProduct();
+
+    List<Product> selectProductsByProductName(String productName);
 }
