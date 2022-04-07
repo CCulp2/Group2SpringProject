@@ -47,7 +47,7 @@ public class ProductDataAccessService implements ProductDao {
     @Override
     public Product updateProductById(int id, Product product) {
         Product productToUpdate = productRepository.getById(id);
-        productToUpdate.setProduct_name(product.getProduct_name());
+        productToUpdate.setName(product.getName());
         productToUpdate.setQuantity_in_stock(product.getQuantity_in_stock());
         productToUpdate.setUnit_price(product.getUnit_price());
         productToUpdate.setProductSize(product.getProductSize());
@@ -70,5 +70,16 @@ public class ProductDataAccessService implements ProductDao {
     public List<Product> selectProductsByName(String product_Name) {
         return productRepository.findAllByName(product_Name);
     }
+
+    @Override
+    public List<String> selectDistinctByName() {
+        return productRepository.findDistinctByName();
+    }
+
+    @Override
+    public Product selectFirstByName(String product_name) {
+        return productRepository.findFirstByName(product_name);
+    }
+
 
 }
