@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Product;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -22,4 +21,8 @@ public interface ProductDao {
     List<Product> selectProductsByGenderAndType(String gender, String type);
 
     List<Product> selectProductsByName(String product_name);
+
+    List <String> selectDistinctByName();
+
+    Product selectFirstByName(String product_name);
 }

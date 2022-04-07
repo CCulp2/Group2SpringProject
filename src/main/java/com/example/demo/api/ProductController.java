@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.example.demo.model.Product;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -75,5 +76,17 @@ public class ProductController {
     @CrossOrigin
     public ResponseEntity<List<Product>> getProductsByGenderAndType(@RequestParam String gender, @RequestParam String type) {
         return new ResponseEntity<>(productService.getProductByGenderAndType(gender, type), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/display")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> getProductsForDisplay() {
+        List<Product> products = new ArrayList<Product>();
+        List<String> product_names = productService.getAllDistinctProductNames();
+        for (String name : product_names) {
+            products.add(productService.getFirstByProductName(name));
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
+
     }
 }

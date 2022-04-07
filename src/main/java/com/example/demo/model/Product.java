@@ -32,11 +32,11 @@ public class Product {
 
     }
 
-    public String getProduct_name() {
+    public String getName() {
         return name;
     }
 
-    public void setProduct_name(String product_name) {
+    public void setName(String product_name) {
         this.name = product_name;
     }
 
