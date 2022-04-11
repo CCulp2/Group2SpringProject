@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.example.demo.model.Product;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +51,7 @@ public class ProductController {
     @GetMapping(path = "/product")
     @CrossOrigin
     public ResponseEntity<List<Product>> getProductsByName(@RequestParam String name) {
+        name = name.replace('-', ' ');  
         return new ResponseEntity<>(productService.getAllByProductName(name), HttpStatus.OK);
     }
 
