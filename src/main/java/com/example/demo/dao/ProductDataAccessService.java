@@ -19,9 +19,7 @@ public class ProductDataAccessService implements ProductDao {
     }
 
     @Override
-    public Product insertProduct(Product product) {
-        return productRepository.save(product);
-    }
+    public Product insertProduct(Product product) { return productRepository.save(product); }
 
     @Override
     public List<Product> insertProducts(List<Product> products) {
@@ -55,6 +53,8 @@ public class ProductDataAccessService implements ProductDao {
         productToUpdate.setProduct_img_url(product.getProduct_img_url());
         productToUpdate.setDescription(product.getDescription());
         productToUpdate.setType(product.getType());
+        productRepository.save(productToUpdate);
+
         return productToUpdate;
     }
 
