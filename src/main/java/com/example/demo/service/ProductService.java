@@ -22,6 +22,10 @@ public class ProductService {
         return productDao.insertProduct(product);
     }
 
+    public List<Product> addProducts(List<Product> products) {
+        return productDao.insertProducts(products);
+    }
+
     public List<Product> getAllProducts() {
         return productDao.selectAllProducts();
     }
@@ -37,4 +41,21 @@ public class ProductService {
     public Product updateProduct(int id, Product newProduct) {
         return productDao.updateProductById(id, newProduct);
     }
+
+    public List<Product> getProductByGenderAndType(String productGender, String type) {
+        return productDao.selectProductsByGenderAndType(productGender, type);
+    }
+
+    public List<Product> getAllByProductName(String productName) {
+        return productDao.selectProductsByName(productName);
+    }
+
+    public List<String> getAllDistinctProductNames() {
+        return productDao.selectDistinctByName();
+    }
+
+    public Product getFirstByProductName(String product_name) {
+        return productDao.selectFirstByName(product_name);
+    }
+
 }

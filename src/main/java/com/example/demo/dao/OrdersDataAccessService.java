@@ -1,9 +1,11 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Orders;
+import com.example.demo.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -11,53 +13,38 @@ import java.util.UUID;
 @Repository("MYSQL1")
 public class OrdersDataAccessService implements OrdersDao{
 
-    private final JdbcTemplate jdbcTemplate;
+    private OrdersRepository ordersRepo;
+
     @Autowired
-    public OrdersDataAccessService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
-
-
-    @Override
-    public int insertOrder(UUID id, Orders orders) {
-        //String idGenerator = UUID.randomUUID().toString();
-        String sql = "insert into Orders (order_id, order_date, Customers_customer_ID)  values" +
-                "('" + id +"'" +
-                ", '" + orders.getOrderDate() +"'" +
-                ", '" + orders.getCustomerID() + "');";
-        jdbcTemplate.update(sql);
-        return 0;
-
+    public OrdersDataAccessService(OrdersRepository ordersRepo) {
+        this.ordersRepo = ordersRepo;
     }
 
     @Override
-    public List<Orders> selectAllOrders() {
+    public Orders insertOrder(Orders order) { return ordersRepo.save(order); }
 
-        String sql = "select order_id, order_date, Customers_customer_id from Orders;";
-        List<Orders> orders = jdbcTemplate.query(sql, (resultSet, i) -> {
-            String id = resultSet.getString("order_id");
-            String orderDate = resultSet.getString("order_date");
-            String CustomerID = resultSet.getString("Customers_customer_id");
-            return new Orders(id, orderDate, CustomerID);
-        });
-        return orders;
-
-    }
+    @Override
+    public List<Orders> selectAllOrders() { return ordersRepo.findAll(); }
 
     @Override
     public Optional<Orders> selectOrderById(UUID id) {
-        return Optional.empty();
+        Optional<Orders> orderToReturn = ordersRepo.findById(id);
+        return orderToReturn;
     }
 
     @Override
-    public int deleteOrderById(UUID id) {
-        return 0;
+    public void deleteOrderById(UUID id) {
+        ordersRepo.deleteAllById(Collections.singleton(id));
     }
 
     @Override
-    public int updateOrderById(UUID id, Orders orders) {
-        return 0;
+    public Orders updateOrderById(UUID id, Orders order) {
+        Orders orderToUpdate = ordersRepo.getById(id);
+        orderToUpdate.setOrderDate(order.getOrderDate());
+        orderToUpdate.setCustomerID(order.getCustomerID());
+        ordersRepo.save(orderToUpdate);
+
+        return orderToUpdate;
     }
 
 

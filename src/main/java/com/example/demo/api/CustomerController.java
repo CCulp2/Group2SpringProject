@@ -19,30 +19,20 @@ public class CustomerController {
 	private final CustomerService customerService;
 
 	@Autowired
-	public CustomerController(CustomerService customerService) {
-		this.customerService = customerService;
-	}
+	public CustomerController(CustomerService customerService) { this.customerService = customerService; }
 
 	@PostMapping
 	@CrossOrigin
-	public ResponseEntity<Customer> addCustomer( @RequestBody Customer customer) {
-		return new ResponseEntity<>(customerService.addCustomer(customer), HttpStatus.CREATED);
-	}
+	public ResponseEntity<Customer> addCustomer( @RequestBody Customer customer) { return new ResponseEntity<>(customerService.addCustomer(customer), HttpStatus.CREATED); }
 
 	@GetMapping
-	public List<Customer> getAllCustomers() {
-		return customerService.getAllCustomers();
-	}
+	public List<Customer> getAllCustomers() { return customerService.getAllCustomers(); }
 
 	@GetMapping(path = "{id}")
-	public Optional<Customer> getCustomerById(@PathVariable("id") UUID id) {
-		return customerService.getCustomerById(id);
-	}
+	public Optional<Customer> getCustomerById(@PathVariable("id") UUID id) { return customerService.getCustomerById(id); }
 
 	@DeleteMapping(path = "{id}")
-	public void deleteCustomerById(@PathVariable("id") UUID id) {
-		customerService.deleteCustomer(id);
-	}
+	public void deleteCustomerById(@PathVariable("id") UUID id) { customerService.deleteCustomer(id); }
 
 	@PutMapping(path = "{id}")
 	@CrossOrigin

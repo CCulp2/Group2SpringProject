@@ -1,30 +1,39 @@
 package com.example.demo.model;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.UUID;
+
+@Entity
+@Table(name="Orders")
 public class Orders {
 
-    private String orderID;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "order_id")
+    @Type(type = "uuid-char")
+    private UUID orderID;
+    @Column(name = "order_date")
     private String orderDate;
+    @Column(name = "customers_customer_id")
     private String customerID;
 
 
-    public Orders(@JsonProperty("orderID") String orderID,
-                    @JsonProperty("orderDate") String orderDate,
-                    @JsonProperty("customerID") String customerID) {
-        this.orderID = orderID;
-        this.orderDate= orderDate;
-        this.customerID = customerID;
+    public Orders() { }
 
-    }
+    public void setOrderID(UUID orderID) { this.orderID = orderID; }
 
-    public String getOrderId() {
-        return orderID;
-    }
+    public void setOrderDate(String orderDate) { this.orderDate = orderDate; }
 
-    public String getOrderDate() {
-        return orderDate;
-    }
+    public void setCustomerID(String customerID) { this.customerID = customerID; }
 
-    public String getCustomerID() {return customerID; }
+    public UUID getOrderID() { return orderID; }
+
+    public String getOrderDate() { return orderDate; }
+
+    public String getCustomerID() { return customerID; }
 
 }

@@ -2,6 +2,8 @@ package com.example.demo.api;
 
 
 import com.example.demo.service.ProductService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.example.demo.model.Product;
@@ -29,10 +31,28 @@ public class ProductController {
         return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED);
     }
 
+    @PostMapping(path = "/addMultiple")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> addProducts(@RequestBody Product[] products) {
+        List<Product> productsToAdd = new ArrayList<Product>();
+        for (Product prod : products) {
+            productsToAdd.add(prod);
+        }
+        return new ResponseEntity<List<Product>>(productService.addProducts(productsToAdd), HttpStatus.CREATED);
+    }
+
     @GetMapping
     @CrossOrigin
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/product")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> getProductsByName(@RequestParam String name) {
+        name = name.replace('-', ' ');  
+        return new ResponseEntity<>(productService.getAllByProductName(name), HttpStatus.OK);
     }
 
     @GetMapping(path = "{id}")
@@ -50,5 +70,23 @@ public class ProductController {
     public ResponseEntity<Product> updateProduct(@PathVariable("id") int id, @RequestBody Product productToUpdate) {
         productService.updateProduct(id, productToUpdate);
         return new ResponseEntity<Product>(productToUpdate, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/search")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> getProductsByGenderAndType(@RequestParam String gender, @RequestParam String type) {
+        return new ResponseEntity<>(productService.getProductByGenderAndType(gender, type), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/display")
+    @CrossOrigin
+    public ResponseEntity<List<Product>> getProductsForDisplay() {
+        List<Product> products = new ArrayList<Product>();
+        List<String> product_names = productService.getAllDistinctProductNames();
+        for (String name : product_names) {
+            products.add(productService.getFirstByProductName(name));
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
+
     }
 }

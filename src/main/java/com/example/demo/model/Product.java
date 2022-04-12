@@ -8,43 +8,43 @@ import javax.persistence.*;
 public class Product {
 
     @Id
+    @GeneratedValue
     @Column(name = "product_id")
     private Integer product_id;
     @Column(name = "product_name")
-    private String product_name;
+    private String name;
     @Column(name = "product_type")
-    @Enumerated(EnumType.ORDINAL)
-    private ProductType type;
+    private String type;
     @Column(name = "quantity_in_stock")
     private int quantity_in_stock;
     @Column(name = "unit_price")
     private double unit_price;
-    @Column(name = "sexcategory_sex_id")
-    @Enumerated(EnumType.ORDINAL)
-    private Gender productGender;
-    @Column(name = "sizecategory_size_id")
-    @Enumerated(EnumType.ORDINAL)
-    private Size productSize;
+    @Column(name = "gender")
+    private String productGender;
+    @Column(name = "size")
+    private String productSize;
     @Column(name = "product_img_url")
     private String product_img_url;
+    @Column(name = "description")
+    private String description;
 
     public Product() {
 
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getName() {
+        return name;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setName(String product_name) {
+        this.name = product_name;
     }
 
-    public ProductType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(ProductType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -64,19 +64,19 @@ public class Product {
         this.unit_price = unit_price;
     }
 
-    public Gender getProductGender() {
+    public String getProductGender() {
         return productGender;
     }
 
-    public void setProductGender(Gender productGender) {
+    public void setProductGender(String productGender) {
         this.productGender = productGender;
     }
 
-    public Size getProductSize() {
+    public String getProductSize() {
         return productSize;
     }
 
-    public void setProductSize(Size productSize) {
+    public void setProductSize(String productSize) {
         this.productSize = productSize;
     }
 
@@ -94,5 +94,13 @@ public class Product {
 
     public void setProduct_id(Integer product_id) {
         this.product_id = product_id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

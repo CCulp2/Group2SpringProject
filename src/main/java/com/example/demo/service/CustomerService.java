@@ -31,17 +31,14 @@ public class CustomerService implements UserDetailsService {
 		return customerDao.insertCustomer(customer);
 	}
 
-	public List<Customer> getAllCustomers() {
-		return customerDao.selectAllCustomers();
-	}
 
-	public Optional<Customer> getCustomerById(UUID id) {
-		return customerDao.selectCustomerById(id);
-	}
+	public List<Customer> getAllCustomers() { return customerDao.selectAllCustomers(); }
 
-	public void deleteCustomer(UUID id) {
-		customerDao.deleteCustomerById(id);
-	};
+	public Optional<Customer> getCustomerById(UUID id) { return customerDao.selectCustomerById(id); }
+
+	public void deleteCustomer(UUID id) { customerDao.deleteCustomerById(id); }
+
+	public Customer updateCustomer(UUID id, Customer newCustomer) { return customerDao.updateCustomerById(id, newCustomer); }
 
 	public Customer updateCustomer(UUID id, Customer newCustomer) {
 		return customerDao.updateCustomerById(id, newCustomer);
