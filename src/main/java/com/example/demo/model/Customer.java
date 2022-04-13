@@ -1,71 +1,77 @@
 package com.example.demo.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
-@Table(name="customers")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
 
 	@Id
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name="uuid2", strategy = "uuid2")
-	@Column(name="customer_id")
-	@Type(type="uuid-char")
-	private UUID id;
-	@Column(name="first_Name", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String firstName;
-	@Column(name="last_name", nullable = false)
 	private String lastName;
-	@Column(name="username", nullable = false)
 	private String username;
-	@Column(name="password", nullable = false)
 	private String password;
-	@Column(name="address", nullable = false)
 	private String address;
-	@Column(name="city", nullable = false)
 	private String city;
-	@Column(name="state", nullable = false)
 	private String state;
+	@ManyToMany(fetch = EAGER)
+	private Collection<UserRole> roles = new ArrayList<>();
 
 
-	public Customer() { }
 
+//	public void setId(Long id) {this.id = id;}
+//
+//	public void setFirstName(String firstName) { this.firstName = firstName; }
+//
+//	public void setLastName(String lastName) { this.lastName = lastName; }
+//
+//	public void setUsername(String username) { this.username = username; }
+//
+//	public void setPassword(String password) { this.password = password; }
+//
+//	public void setAddress(String address) { this.address = address; }
+//
+//	public void setCity(String city) { this.city = city; }
+//
+//	public void setState(String state) { this.state = state; }
+//
+//	public Long getId() { return id; }
+//
+//	public String getFirstName() { return firstName; }
+//
+//	public String getLastName() {return lastName; }
+//
+//	public String getUsername() {return username; }
+//
+//	public String getPassword() {return password; }
+//
+//	public String getAddress() {return address; }
+//
+//	public String getCity() {return city; }
+//
+//	public String getState() {return state; }
+//
+//	public Collection<UserRole> getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Collection<UserRole> role) {
+//		this.role = role;
+//	}
 
-
-	public void setId(UUID id) {this.id = id;}
-
-	public void setFirstName(String firstName) { this.firstName = firstName; }
-
-	public void setLastName(String lastName) { this.lastName = lastName; }
-
-	public void setUsername(String username) { this.username = username; }
-
-	public void setPassword(String password) { this.password = password; }
-
-	public void setAddress(String address) { this.address = address; }
-
-	public void setCity(String city) { this.city = city; }
-
-	public void setState(String state) { this.state = state; }
-
-	public UUID getId() { return id; }
-
-	public String getFirstName() { return firstName; }
-
-	public String getLastName() {return lastName; }
-
-	public String getUsername() {return username; }
-
-	public String getPassword() {return password; }
-
-	public String getAddress() {return address; }
-
-	public String getCity() {return city; }
-
-	public String getState() {return state; }
-
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		return role;
+//	}
 }
