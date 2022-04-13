@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.example.demo.dao.CustomerDao;
 import com.example.demo.model.Customer;
+import com.example.demo.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,17 +32,22 @@ public class CustomerService implements UserDetailsService {
 		return customerDao.insertCustomer(customer);
 	}
 
-
 	public List<Customer> getAllCustomers() { return customerDao.selectAllCustomers(); }
 
 	public Optional<Customer> getCustomerById(UUID id) { return customerDao.selectCustomerById(id); }
 
 	public void deleteCustomer(UUID id) { customerDao.deleteCustomerById(id); }
 
-	public Customer updateCustomer(UUID id, Customer newCustomer) { return customerDao.updateCustomerById(id, newCustomer); }
-
 	public Customer updateCustomer(UUID id, Customer newCustomer) {
 		return customerDao.updateCustomerById(id, newCustomer);
+	}
+
+	public UserRole saveRole(UserRole role) {
+		return customerDao.saveRole(role);
+	}
+
+	public void addRoleToCustomer(String username, String roleName) {
+		customerDao.addRoleToCustomer(username, roleName);
 	}
 
 	@Override

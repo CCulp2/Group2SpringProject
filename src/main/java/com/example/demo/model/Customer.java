@@ -1,38 +1,43 @@
 package com.example.demo.model;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name="customers")
 public class Customer {
 
 	@Id
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name="uuid2", strategy = "uuid2")
-	@Column(name="customer_id")
-	@Type(type="uuid-char")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
-	@Column(name="first_Name", nullable = false)
 	private String firstName;
-	@Column(name="last_name", nullable = false)
 	private String lastName;
-	@Column(name="username", nullable = false)
 	private String username;
-	@Column(name="password", nullable = false)
 	private String password;
-	@Column(name="address", nullable = false)
 	private String address;
-	@Column(name="city", nullable = false)
 	private String city;
-	@Column(name="state", nullable = false)
 	private String state;
+	@ManyToMany(fetch = EAGER)
+	private Collection<UserRole> role = new ArrayList<>();
 
 
 	public Customer() { }
+
+	public Customer(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 
 
 
@@ -68,4 +73,15 @@ public class Customer {
 
 	public String getState() {return state; }
 
+	public Collection<UserRole> getRole() {
+		return role;
+	}
+
+	public void setRole(Collection<UserRole> role) {
+		this.role = role;
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
 }

@@ -10,8 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration @EnableWebSecurity
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
+
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -27,10 +32,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        CustomAuthenticationFilter customAuthFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        customAuthFilter.setFilterProcessesUrl("/api/v1/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().anyRequest().permitAll();
-        http.addFilter(new CustomAuthFilter(authenticationManagerBean()));
+        http.authorizeRequests().antMatchers("/api/v1/login/**").permitAll();
+        http.authorizeRequests().antMatchers(POST, "/api/v1/product/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/api/v1/product/**").permitAll();
+        http.authorizeRequests().antMatchers(GET, "/api/v1/customer/**").hasAuthority("CUSTOMER");
+        http.authorizeRequests().antMatchers(GET, "/api/v1/orders/**").hasAuthority("CUSTOMER");
+        http.authorizeRequests().antMatchers(POST, "/api/v1/orders/**").hasAuthority("CUSTOMER");
+        http.addFilter(customAuthFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

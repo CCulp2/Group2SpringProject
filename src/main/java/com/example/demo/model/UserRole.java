@@ -1,6 +1,24 @@
 package com.example.demo.model;
 
-public enum UserRole {
-    CUSTOMER,
-    ADMIN
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Data
+@NoArgsConstructor
+public class UserRole {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String name;
+
+    public UserRole(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
