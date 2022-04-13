@@ -36,12 +36,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         customAuthFilter.setFilterProcessesUrl("/api/v1/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/api/v1/login/**").permitAll();
-        http.authorizeRequests().antMatchers(POST, "/api/v1/product/**").hasAuthority("ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/product/**").permitAll();
-        http.authorizeRequests().antMatchers(GET, "/api/v1/customer/**").hasAuthority("CUSTOMER");
-        http.authorizeRequests().antMatchers(GET, "/api/v1/orders/**").hasAuthority("CUSTOMER");
-        http.authorizeRequests().antMatchers(POST, "/api/v1/orders/**").hasAuthority("CUSTOMER");
+//        http.authorizeRequests().antMatchers("/api/v1/login/**").permitAll();
+//        http.authorizeRequests().antMatchers(POST, "/api/v1/product/**").hasAuthority("ADMIN");
+//        http.authorizeRequests().antMatchers(GET, "/api/v1/product/**").permitAll();
+//        http.authorizeRequests().antMatchers(GET, "/api/v1/customer/**").hasAuthority("CUSTOMER");
+//        http.authorizeRequests().antMatchers(GET, "/api/v1/orders/**").hasAuthority("CUSTOMER");
+//        http.authorizeRequests().antMatchers(POST, "/api/v1/orders/**").hasAuthority("CUSTOMER");
         http.addFilter(customAuthFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

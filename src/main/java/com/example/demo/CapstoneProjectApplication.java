@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
+
 @SpringBootApplication
 public class CapstoneProjectApplication {
 
@@ -28,7 +30,7 @@ public class CapstoneProjectApplication {
 			} catch (UsernameNotFoundException e) {
 				service.saveRole(new UserRole(null, "ADMIN"));
 				service.saveRole(new UserRole(null, "CUSTOMER"));
-				Customer admin = new Customer("ADMIN", "PASSWORD");
+				Customer admin = new Customer(null, "ADMIN", "ADMIN", "ADMIN", "PASSWORD", "123 ADMIN", "ADMIN", "AM", new ArrayList<>());
 				service.addCustomer(admin);
 				service.addRoleToCustomer("ADMIN", "ADMIN");
 				service.addRoleToCustomer("ADMIN", "CUSTOMER");

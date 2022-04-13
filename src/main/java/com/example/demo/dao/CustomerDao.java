@@ -13,11 +13,11 @@ public interface CustomerDao {
 
 	List<Customer> selectAllCustomers();
 
-	Optional<Customer> selectCustomerById(UUID id);
+	Optional<Customer> selectCustomerById(Long id);
 
-	void deleteCustomerById(UUID id);
+	void deleteCustomerById(Long id);
 
-	Customer updateCustomerById(UUID id, Customer customer);
+	Customer updateCustomerById(Long id, Customer customer);
 
 	Customer getCustomerByUsername(String name);
 
