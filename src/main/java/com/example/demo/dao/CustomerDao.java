@@ -1,7 +1,6 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Customer;
-import com.example.demo.model.UserRole;
 
 import java.util.List;
 import java.util.Optional;

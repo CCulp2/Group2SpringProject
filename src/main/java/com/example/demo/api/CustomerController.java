@@ -5,31 +5,21 @@ import com.example.demo.model.UsernamePasswordMap;
 import com.example.demo.service.CustomerService;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import com.example.demo.model.Customer;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @RequestMapping("api/v1/customer")
 @RestController
-@RequiredArgsConstructor
 public class CustomerController {
 
 	
 	private final CustomerService customerService;
 
 	@Autowired
-	public CustomerController(CustomerService customerService, UserRoleRepository roleService) {
+	public CustomerController(CustomerService customerService) {
 		this.customerService = customerService;
 	}
 
@@ -71,29 +61,4 @@ public class CustomerController {
 		customerService.updateCustomer(id, customerToUpdate);
 		return new ResponseEntity<Customer>(customerToUpdate, HttpStatus.OK);
 	}
-
-	@PostMapping(path = "/role/save")
-	@CrossOrigin
-	public ResponseEntity<UserRole> saveRole(@RequestBody UserRole role) {
-		return new ResponseEntity<UserRole>(customerService.saveRole(role), HttpStatus.OK);
-	}
-
-	@PostMapping(path = "/role/addToCustomer")
-	@CrossOrigin
-	public ResponseEntity<?> addRoleToCustomer(@RequestBody RoleToUserForm form) {
-		customerService.addRoleToCustomer(form.getUsername(), form.getRoleName());
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	@GetMapping("/customer/refresh")
-	@CrossOrigin
-	public void refreshToken(HttpServletRequest request, HttpServletResponse response) {
-		String authorizationHeader = request.getHeader(AUTHORIZATION);
-	}
-}
-
-@Data
-class RoleToUserForm{
-	private String username;
-	private String roleName;
 }
