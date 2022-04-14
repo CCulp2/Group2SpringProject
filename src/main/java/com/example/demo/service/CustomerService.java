@@ -21,10 +21,14 @@ public class CustomerService {
 
 	public List<Customer> getAllCustomers() { return customerDao.selectAllCustomers(); }
 
-	public Optional<Customer> getCustomerById(UUID id) { return customerDao.selectCustomerById(id); }
+	public Optional<Customer> getCustomerById(Long id) { return customerDao.selectCustomerById(id); }
 
-	public void deleteCustomer(UUID id) { customerDao.deleteCustomerById(id); }
+	public Optional<Customer> getCustomerByUsername(String username) {
+		return customerDao.selectCustomerByUsername(username);
+	}
 
-	public Customer updateCustomer(UUID id, Customer newCustomer) { return customerDao.updateCustomerById(id, newCustomer); }
+	public void deleteCustomer(Long id) { customerDao.deleteCustomerById(id); }
+
+	public Customer updateCustomer(Long id, Customer newCustomer) { return customerDao.updateCustomerById(id, newCustomer); }
 
 }

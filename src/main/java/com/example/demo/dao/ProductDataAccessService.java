@@ -50,7 +50,7 @@ public class ProductDataAccessService implements ProductDao {
         productToUpdate.setUnit_price(product.getUnit_price());
         productToUpdate.setProductSize(product.getProductSize());
         productToUpdate.setProductGender(product.getProductGender());
-        productToUpdate.setProduct_img_url(product.getProduct_img_url());
+        productToUpdate.setProductImgUrl(product.getProductImgUrl());
         productToUpdate.setDescription(product.getDescription());
         productToUpdate.setType(product.getType());
         productRepository.save(productToUpdate);

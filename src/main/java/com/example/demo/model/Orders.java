@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -7,33 +9,14 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name="Orders")
 public class Orders {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name = "order_id")
-    @Type(type = "uuid-char")
-    private UUID orderID;
-    @Column(name = "order_date")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderID;
     private String orderDate;
-    @Column(name = "customers_customer_id")
     private String customerID;
-
-
-    public Orders() { }
-
-    public void setOrderID(UUID orderID) { this.orderID = orderID; }
-
-    public void setOrderDate(String orderDate) { this.orderDate = orderDate; }
-
-    public void setCustomerID(String customerID) { this.customerID = customerID; }
-
-    public UUID getOrderID() { return orderID; }
-
-    public String getOrderDate() { return orderDate; }
-
-    public String getCustomerID() { return customerID; }
-
 }

@@ -25,18 +25,30 @@ public class CustomerController {
 	@CrossOrigin
 	public ResponseEntity<Customer> addCustomer( @RequestBody Customer customer) { return new ResponseEntity<>(customerService.addCustomer(customer), HttpStatus.CREATED); }
 
+
+	@PostMapping("/login")
+	@CrossOrigin
+	public ResponseEntity<?> loginCustomer(@RequestBody String username, String password) {
+		Optional<Customer> customer = customerService.getCustomerByUsername(username);
+		if (!customer.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			if ()
+		}
+	}
+
 	@GetMapping
 	public List<Customer> getAllCustomers() { return customerService.getAllCustomers(); }
 
 	@GetMapping(path = "{id}")
-	public Optional<Customer> getCustomerById(@PathVariable("id") UUID id) { return customerService.getCustomerById(id); }
+	public Optional<Customer> getCustomerById(@PathVariable("id") Long id) { return customerService.getCustomerById(id); }
 
 	@DeleteMapping(path = "{id}")
-	public void deleteCustomerById(@PathVariable("id") UUID id) { customerService.deleteCustomer(id); }
+	public void deleteCustomerById(@PathVariable("id") Long id) { customerService.deleteCustomer(id); }
 
 	@PutMapping(path = "{id}")
 	@CrossOrigin
-	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") UUID id, @RequestBody Customer customerToUpdate) {
+	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customerToUpdate) {
 		customerService.updateCustomer(id, customerToUpdate);
 		return new ResponseEntity<Customer>(customerToUpdate, HttpStatus.OK);
 	}
