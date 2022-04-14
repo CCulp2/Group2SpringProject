@@ -32,14 +32,14 @@ public class OrdersController {
     public List<Orders> getAllOrders() { return ordersService.getAllOrders(); }
 
     @GetMapping(path = "{id}")
-    public Optional<Orders> getOrderById(@PathVariable("id") UUID id) { return ordersService.getOrderById(id); }
+    public Optional<Orders> getOrderById(@PathVariable("id") Long id) { return ordersService.getOrderById(id); }
 
     @DeleteMapping(path = "{id}")
-    public void deleteOrderById(@PathVariable("id") UUID id) { ordersService.deleteOrder(id); }
+    public void deleteOrderById(@PathVariable("id") Long id) { ordersService.deleteOrder(id); }
 
     @PutMapping(path = "{id}")
     @CrossOrigin
-    public ResponseEntity<Orders> updateOrder(@PathVariable("id") UUID id, @RequestBody Orders orderToUpdate) {
+    public ResponseEntity<Orders> updateOrder(@PathVariable("id") Long id, @RequestBody Orders orderToUpdate) {
         ordersService.updateOrder(id, orderToUpdate);
         return new ResponseEntity<Orders>(orderToUpdate, HttpStatus.OK);
     }

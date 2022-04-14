@@ -2,7 +2,6 @@ package com.example.demo;
 
 import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
-import com.example.demo.model.ProductLoadData;
 import com.example.demo.service.CustomerService;
 import com.example.demo.service.ProductService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.util.ResourceUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
