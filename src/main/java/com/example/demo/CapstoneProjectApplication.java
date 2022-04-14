@@ -6,8 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 
@@ -18,5 +16,16 @@ public class CapstoneProjectApplication {
 		SpringApplication.run(CapstoneProjectApplication.class, args);
 	}
 
+	@Bean
+	CommandLineRunner run(CustomerService service) {
+		return args -> {
+			if (service.getCustomerByUsername("ADMIN").isEmpty()) {
+				Customer admin = new Customer();
+				admin.setUsername("ADMIN");
+				admin.setPassword("PASSWORD");
+				service.addCustomer(admin);
+			}
+		};
+	}
 
 }
