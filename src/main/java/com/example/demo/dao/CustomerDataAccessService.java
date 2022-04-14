@@ -17,9 +17,6 @@ public class CustomerDataAccessService implements CustomerDao {
 
     private final CustomerRepository customerRepo;
 
-//    @Autowired
-//    public CustomerDataAccessService(CustomerRepository customerRepo, UserRoleRepository roleRepo) { this.customerRepo = customerRepo; this.roleRepo = roleRepo; }
-
     @Override
     public Customer insertCustomer(Customer customer) {
         return customerRepo.save(customer); }
