@@ -16,7 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = AUTO)
-    private Long product_id;
+    private Integer product_id;
     private String name;
     private String type;
     private int quantity_in_stock;

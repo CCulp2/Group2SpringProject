@@ -1,10 +1,12 @@
 package com.example.demo.api;
 
+import com.example.demo.model.UsernamePasswordMap;
 import com.example.demo.service.CustomerService;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import com.example.demo.model.Customer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +30,16 @@ public class CustomerController {
 
 	@PostMapping("/login")
 	@CrossOrigin
-	public ResponseEntity<?> loginCustomer(@RequestBody String username, String password) {
-		Optional<Customer> customer = customerService.getCustomerByUsername(username);
+	public ResponseEntity<?> loginCustomer(@RequestBody UsernamePasswordMap login) {
+		Optional<Customer> customer = customerService.getCustomerByUsername(login.getUsername());
 		if (!customer.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
-			if ()
+			if (!customer.get().getPassword().equals(login.getPassword())) {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
 		}
+		return new ResponseEntity<>(customer.get(), HttpStatus.OK);
 	}
 
 	@GetMapping
