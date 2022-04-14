@@ -36,19 +36,13 @@ public class CustomerService implements UserDetailsService {
 
 	public Optional<Customer> getCustomerById(Long id) { return customerDao.selectCustomerById(id); }
 
+	public Optional<Customer> getCustomerByUsername(String username) {
+		return customerDao.selectCustomerByUsername(username);
+	}
+
 	public void deleteCustomer(Long id) { customerDao.deleteCustomerById(id); }
 
-	public Customer updateCustomer(Long id, Customer newCustomer) {
-		return customerDao.updateCustomerById(id, newCustomer);
-	}
-
-	public UserRole saveRole(UserRole role) {
-		return customerDao.saveRole(role);
-	}
-
-	public void addRoleToCustomer(String username, String roleName) {
-		customerDao.addRoleToCustomer(username, roleName);
-	}
+	public Customer updateCustomer(Long id, Customer newCustomer) { return customerDao.updateCustomerById(id, newCustomer); }
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

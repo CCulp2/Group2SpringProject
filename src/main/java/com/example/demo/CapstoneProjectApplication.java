@@ -17,30 +17,8 @@ public class CapstoneProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CapstoneProjectApplication.class, args);
-
-
-
 	}
 
-	@Bean
-	CommandLineRunner run(CustomerService service) {
-		return args -> {
-			try {
-				service.loadUserByUsername("ADMIN");
-			} catch (UsernameNotFoundException e) {
-				service.saveRole(new UserRole(null, "ADMIN"));
-				service.saveRole(new UserRole(null, "CUSTOMER"));
-				Customer admin = new Customer(null, "ADMIN", "ADMIN", "ADMIN", "PASSWORD", "123 ADMIN", "ADMIN", "AM", new ArrayList<>());
-				service.addCustomer(admin);
-				service.addRoleToCustomer("ADMIN", "ADMIN");
-				service.addRoleToCustomer("ADMIN", "CUSTOMER");
-			}
-		};
-	}
 
-	@Bean
-	BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 
 }

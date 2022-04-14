@@ -15,13 +15,9 @@ public interface CustomerDao {
 
 	Optional<Customer> selectCustomerById(Long id);
 
+	Optional<Customer> selectCustomerByUsername(String username);
+
 	void deleteCustomerById(Long id);
 
 	Customer updateCustomerById(Long id, Customer customer);
-
-	Customer getCustomerByUsername(String name);
-
-	UserRole saveRole(UserRole role);
-
-	void addRoleToCustomer(String username, String roleName);
 }

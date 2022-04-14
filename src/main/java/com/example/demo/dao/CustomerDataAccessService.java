@@ -44,6 +44,11 @@ public class CustomerDataAccessService implements CustomerDao {
         return customerToReturn;
     }
 
+    public Optional<Customer> selectCustomerByUsername(String name) {
+        Optional<Customer> customerToReturn = customerRepo.findCustomerByUsername(name);
+        return customerToReturn;
+    }
+
     @Override
     public void deleteCustomerById(Long id) { customerRepo.deleteAllById(Collections.singleton(id)); }
 
@@ -58,39 +63,7 @@ public class CustomerDataAccessService implements CustomerDao {
         customerToUpdate.setState(customer.getState());
         customerToUpdate.setPassword(customer.getPassword());
         customerRepo.save(customerToUpdate);
-
         return customerToUpdate;
     }
 
-    @Override
-    public Customer getCustomerByUsername(String username) {
-        Customer customer = customerRepo.findByUsername(username);
-        return customer;
-    }
-
-    @Override
-    public UserRole saveRole(UserRole role) {
-        return roleRepo.save(role);
-    }
-
-    @Override
-    public void addRoleToCustomer(String username, String roleName) {
-        Customer customer = customerRepo.findByUsername(username);
-        UserRole role = roleRepo.findByName(roleName);
-        customer.getRoles().add(role);
-        customerRepo.save(customer);
-    }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        Customer customer = customerRepo.findByUsername(username);
-//        if(customer == null) {
-//            throw new UsernameNotFoundException("User not found in database");
-//        } else {
-//            Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-//            customer.getRole().forEach(role ->
-//                    authorities.add(new SimpleGrantedAuthority(role.getName())));
-//            return new org.springframework.security.core.userdetails.User(customer.getUsername(), customer.getPassword(), authorities);
-//        }
-//    }
 }
