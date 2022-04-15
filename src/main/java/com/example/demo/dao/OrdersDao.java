@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Orders;
+import com.example.demo.model.Product;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,9 +14,13 @@ public interface OrdersDao {
 
     List<Orders> selectAllOrders();
 
-    Optional<Orders> selectOrderById(UUID id);
+    Optional<Orders> selectOrderById(Long id);
 
-    void deleteOrderById(UUID id);
+    void deleteOrderById(Long id);
 
-    Orders updateOrderById(UUID id, Orders order);
+    Orders updateOrderById(Long id, Orders order);
+
+    Orders addProductToOrder(Long id, Product product);
+
+    Orders addMultipleProductsToOrder(Long id, List<Product> products);
 }
