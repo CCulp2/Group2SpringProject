@@ -1,6 +1,9 @@
 package com.example.demo.api;
 
+import com.example.demo.model.OrderCustomerMapper;
 import com.example.demo.service.OrdersService;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,21 +29,29 @@ public class OrdersController {
 
     @PostMapping
     @CrossOrigin
-    public ResponseEntity<Orders> addOrder(@RequestBody Orders order) { return new ResponseEntity<>(ordersService.addOrder(order), HttpStatus.CREATED); }
+    public ResponseEntity<Orders> addOrder(@RequestBody OrderCustomerMapper incomingOrder) {
+        Orders order = new Orders();
+        order.setCustomerID(incomingOrder.getCustomerID());
+        order.setProducts(incomingOrder.getProductsToAdd());
+        order.setOrderDate(LocalDate.now().toString());
+        return new ResponseEntity<>(ordersService.addOrder(order), HttpStatus.CREATED);
+    }
 
     @GetMapping
     public List<Orders> getAllOrders() { return ordersService.getAllOrders(); }
 
     @GetMapping(path = "{id}")
-    public Optional<Orders> getOrderById(@PathVariable("id") UUID id) { return ordersService.getOrderById(id); }
+    public Optional<Orders> getOrderById(@PathVariable("id") Long id) { return ordersService.getOrderById(id); }
 
     @DeleteMapping(path = "{id}")
-    public void deleteOrderById(@PathVariable("id") UUID id) { ordersService.deleteOrder(id); }
+    public void deleteOrderById(@PathVariable("id") Long id) { ordersService.deleteOrder(id); }
 
     @PutMapping(path = "{id}")
     @CrossOrigin
-    public ResponseEntity<Orders> updateOrder(@PathVariable("id") UUID id, @RequestBody Orders orderToUpdate) {
+    public ResponseEntity<Orders> updateOrder(@PathVariable("id") Long id, @RequestBody Orders orderToUpdate) {
         ordersService.updateOrder(id, orderToUpdate);
         return new ResponseEntity<Orders>(orderToUpdate, HttpStatus.OK);
     }
+
+
 }
