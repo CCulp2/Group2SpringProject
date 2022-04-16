@@ -6,6 +6,7 @@ import com.example.demo.service.CustomerService;
 import java.util.List;
 import java.util.Optional;
 import com.example.demo.model.Customer;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class CustomerController {
 
 	@PostMapping("/login")
 	@CrossOrigin
-	public ResponseEntity<?> loginCustomer(@RequestBody UsernamePasswordMap login) {
+	public ResponseEntity<?> loginCustomer(@RequestBody @NotNull UsernamePasswordMap login) {
 		Optional<Customer> customer = customerService.getCustomerByUsername(login.getUsername());
 		if (!customer.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,14 +51,14 @@ public class CustomerController {
 	}
 
 	@GetMapping(path = "{id}")
-	public Optional<Customer> getCustomerById(@PathVariable("id") Long id) { return customerService.getCustomerById(id); }
+	public Optional<Customer> getCustomerById(@PathVariable("id") int id) { return customerService.getCustomerById(id); }
 
 	@DeleteMapping(path = "{id}")
-	public void deleteCustomerById(@PathVariable("id") Long id) { customerService.deleteCustomer(id); }
+	public void deleteCustomerById(@PathVariable("id") int id) { customerService.deleteCustomer(id); }
 
 	@PutMapping(path = "{id}")
 	@CrossOrigin
-	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customerToUpdate) {
+	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") int id, @RequestBody Customer customerToUpdate) {
 		customerService.updateCustomer(id, customerToUpdate);
 		return new ResponseEntity<Customer>(customerToUpdate, HttpStatus.OK);
 	}

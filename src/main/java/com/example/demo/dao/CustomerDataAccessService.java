@@ -25,7 +25,7 @@ public class CustomerDataAccessService implements CustomerDao {
     public List<Customer> selectAllCustomers() { return customerRepo.findAll(); }
 
     @Override
-    public Optional<Customer> selectCustomerById(Long id) {
+    public Optional<Customer> selectCustomerById(int id) {
         Optional<Customer> customerToReturn = customerRepo.findById(id);
         return customerToReturn;
     }
@@ -36,10 +36,10 @@ public class CustomerDataAccessService implements CustomerDao {
     }
 
     @Override
-    public void deleteCustomerById(Long id) { customerRepo.deleteAllById(Collections.singleton(id)); }
+    public void deleteCustomerById(int id) { customerRepo.deleteAllById(Collections.singleton(id)); }
 
     @Override
-    public Customer updateCustomerById(Long id, Customer customer) {
+    public Customer updateCustomerById(int id, Customer customer) {
         Customer customerToUpdate = customerRepo.getById(id);
         customerToUpdate.setFirstName(customer.getFirstName());
         customerToUpdate.setLastName(customer.getLastName());

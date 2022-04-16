@@ -12,11 +12,11 @@ public interface CustomerDao {
 
 	List<Customer> selectAllCustomers();
 
-	Optional<Customer> selectCustomerById(Long id);
+	Optional<Customer> selectCustomerById(int id);
 
 	Optional<Customer> selectCustomerByUsername(String username);
 
-	void deleteCustomerById(Long id);
+	void deleteCustomerById(int id);
 
-	Customer updateCustomerById(Long id, Customer customer);
+	Customer updateCustomerById(int id, Customer customer);
 }
