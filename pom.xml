@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
-		<frontend-src-dir>${project.basedir}/src/main/frontend</frontend-src-dir>
+		<frontend-src-dir>${project.basedir}/frontend</frontend-src-dir>
 		<node.version>v14.15.4</node.version>
 		<yarn.version>v1.16.0</yarn.version>
 		<frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
@@ -52,16 +52,6 @@
 			<version>5.0.1</version>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-jdbc</artifactId>-->
-<!--			<exclusions>-->
-<!--				<exclusion>-->
-<!--					<groupId>org.apache.tomcat</groupId>-->
-<!--					<artifactId>tomcat-jdbc</artifactId>-->
-<!--				</exclusion>-->
-<!--			</exclusions>-->
-<!--		</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 
@@ -92,10 +82,6 @@
 			<version>3.19.0</version>
 		</dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--        </dependency>-->
 		<dependency>
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
@@ -106,37 +92,19 @@
 
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<groupId>com.github.eirslett</groupId>-->
-<!--				<artifactId>frontend-maven-plugin</artifactId>-->
-<!--				&lt;!&ndash; Use the latest released version:-->
-<!--        https://repo1.maven.org/maven2/com/github/eirslett/frontend-maven-plugin/ &ndash;&gt;-->
-<!--				<version>1.9.1</version>-->
-<!--				<executions>-->
-<!--				<execution>-->
-<!--					&lt;!&ndash; optional: you don't really need execution ids, but it looks nice in your build log. &ndash;&gt;-->
-<!--					<id>install node and npm</id>-->
-<!--					<goals>-->
-<!--						<goal>install-node-and-npm</goal>-->
-<!--					</goals>-->
-<!--					&lt;!&ndash; optional: default phase is "generate-resources" &ndash;&gt;-->
-<!--					<phase>generate-resources</phase>-->
-<!--				</execution>-->
-<!--			</executions>-->
-<!--			<configuration>-->
-<!--				<nodeVersion>v8.11.1</nodeVersion>-->
-
-<!--				&lt;!&ndash; optional: with node version greater than 4.0.0 will use npm provided by node distribution &ndash;&gt;-->
-<!--				<npmVersion>5.6.0</npmVersion>-->
-
-<!--				&lt;!&ndash; optional: where to download node and npm from. Defaults to https://nodejs.org/dist/ &ndash;&gt;-->
-<!--				<downloadRoot>https://nodejs.org/dist/</downloadRoot>-->
-<!--			</configuration>-->
-<!--			</plugin>-->
+			<plugin>
+				<!-- Build an executable JAR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+<!--				<version>3.1.0</version>-->
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.example.demo.CapstoneProjectApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
@@ -151,8 +119,8 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<nodeVersion>v12.14.0</nodeVersion>
-							<npmVersion>6.13.4</npmVersion>
+							<nodeVersion>v14.15.0</nodeVersion>
+							<npmVersion>6.14.8</npmVersion>
 						</configuration>
 					</execution>
 					<execution>
@@ -170,6 +138,24 @@
 <!--							<goal>webpack</goal>-->
 <!--						</goals>-->
 <!--					</execution>-->
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<configuration>
+							<target>
+								<copy todir="${project.build.directory}/classes/public">
+									<fileset dir="${project.basedir}/frontend/build"/>
+								</copy>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 
