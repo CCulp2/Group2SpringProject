@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("api/v1/product")
 @RestController
+@CrossOrigin("*")
 public class ProductController {
 
 
