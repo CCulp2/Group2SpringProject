@@ -92,19 +92,19 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<!-- Build an executable JAR -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-<!--				<version>3.1.0</version>-->
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.example.demo.CapstoneProjectApplication</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				&lt;!&ndash; Build an executable JAR &ndash;&gt;-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-jar-plugin</artifactId>-->
+<!--&lt;!&ndash;				<version>3.1.0</version>&ndash;&gt;-->
+<!--				<configuration>-->
+<!--					<archive>-->
+<!--						<manifest>-->
+<!--							<mainClass>com.example.demo</mainClass>-->
+<!--						</manifest>-->
+<!--					</archive>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
