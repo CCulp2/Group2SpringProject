@@ -6,6 +6,6 @@ import java.util.List;
 
 @Data
 public class OrderCustomerMapper {
-    Long customerID;
+    int customerID;
     List<Product> productsToAdd;
 }

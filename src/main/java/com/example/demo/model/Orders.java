@@ -19,7 +19,7 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderID;
     private String orderDate;
-    private Long customerID;
-    @OneToMany
+    private int customerID;
+    @ManyToMany
     List<Product> products;
 }
