@@ -17,10 +17,13 @@ import {
   getItemByName,
   convertParamToItemName,
 } from "../Components/Items/ItemsService";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { addToShoppingCart } from "../Components/ShoppingCart/CartService";
+import { toast } from 'react-toastify';
 
 function Item() {
+  const sendToast = (message) => toast(message);
+  const navigate = useNavigate();
   // Handles Product @Size and change item ---------{
   const [size, setSize] = React.useState("M");
 
@@ -45,7 +48,8 @@ function Item() {
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
       addToShoppingCart(selectedItem);
-      console.log(selectedItem);
+      sendToast("Added to cart!");
+      navigate(-1);      
     }
   }
 

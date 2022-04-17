@@ -13,7 +13,6 @@ import {
   customerIsLoggedIn,
   LogoutCustomer
 } from "../Components/Customer/CustomerService";
-import { useState } from "react";
 import {toast} from 'react-toastify';
 
 // This page renders the main navigation bar shown on every page
@@ -25,10 +24,6 @@ function MainNavigation() {
   const handleNavClick = (destination) => {
     navigate(destination);
   };
-
-  const handleLoginClick = (destination) => {
-    navigate(destination);
-  }
 
   const handleLogoutClick = () => {
     LogoutCustomer();
