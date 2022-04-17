@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version>
+		<version>2.6.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
@@ -92,19 +92,19 @@
 
 	<build>
 		<plugins>
-<!--			<plugin>-->
-<!--				&lt;!&ndash; Build an executable JAR &ndash;&gt;-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-jar-plugin</artifactId>-->
-<!--&lt;!&ndash;				<version>3.1.0</version>&ndash;&gt;-->
-<!--				<configuration>-->
-<!--					<archive>-->
-<!--						<manifest>-->
-<!--							<mainClass>com.example.demo</mainClass>-->
-<!--						</manifest>-->
-<!--					</archive>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
+			<plugin>
+				<!-- Build an executable JAR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.example.demo.CapstoneProjectApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>

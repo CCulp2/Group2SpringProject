@@ -1,7 +1,5 @@
 package com.example.demo.service;
-
 import java.util.*;
-
 import com.example.demo.dao.CustomerDao;
 import com.example.demo.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;

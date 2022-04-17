@@ -2,11 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-
 import com.example.demo.dao.OrdersDao;
 import com.example.demo.model.Orders;
-
 import com.example.demo.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

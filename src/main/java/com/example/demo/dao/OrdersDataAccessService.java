@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("MYSQL1")
 public class OrdersDataAccessService implements OrdersDao{
