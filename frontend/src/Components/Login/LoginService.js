@@ -2,7 +2,6 @@ import { API_URL_BASE } from "../APIUrlBase";
 import { setLoggedInCustomer } from "../Customer/CustomerService";
 
 const LOGIN_BASE = API_URL_BASE + "/customer/login";
-const abort = new AbortController();
 let loginStatus;
 
 

@@ -12,6 +12,8 @@ import * as Yup from "yup";
 import React from "react";
 import { addCustomer } from "./RegisterService";
 import { stateAbbrev } from "./stateabbreviation";
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router";
 
 const validationSchema = Yup.object({
   username: Yup.string().required("A Username is required"),
@@ -44,11 +46,15 @@ const initialValues = {
 };
 
 export default function Register() {
+  const sendToast = (message) => toast(message);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
     validationSchema: validationSchema,
     onSubmit: (values) => {
       addCustomer(values);
+      sendToast("You're all set!");
+      navigate('/');
     }
   });
 

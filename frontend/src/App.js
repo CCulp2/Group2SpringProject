@@ -15,7 +15,7 @@ import Confirmation from './Components/Confirmation/Confirmation';
 import ItemNotFound from './pages/ItemNotFound.jsx';
 import Footer from './layout/Footer.jsx';
 import React from 'react';
-import { ToastContainer, Toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 // This constant is used to create our theme for the website.

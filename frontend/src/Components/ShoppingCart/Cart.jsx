@@ -1,8 +1,5 @@
-import { CssBaseline, Grid, Typography, CardActionArea } from "@mui/material";
+import { CssBaseline, Grid, Typography } from "@mui/material";
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/system/Box";
 import Button from "@mui/material/Button";
@@ -14,12 +11,15 @@ import {
 } from "./CartService";
 import CartItem from "./CartItem";
 import { submitOrder } from "../Confirmation/OrderAndConfirmationService";
+import { customerIsLoggedIn } from '../Customer/CustomerService';
+import { toast } from 'react-toastify';
 
 // This is the shopping cart page
 // This function maps the items in the cart to the cart page
 
 function CartPage() {
   const navigate = useNavigate();
+  const sendToast = (message) => toast(message);
   const [currentCart, setCurrentCart] = React.useState(getShoppingCartItems());
 
   const handleRemove = (cartIdToDelete) => {
@@ -27,7 +27,6 @@ function CartPage() {
     newCart.filter((item) => item.cartId !== cartIdToDelete);
     removeFromShoppingCart(cartIdToDelete);
     setCurrentCart(getShoppingCartItems());
-    // setCartTotals(getShoppingCartItems());
   };
 
   const [cartTotals, setCartTotals] = React.useState(
@@ -94,14 +93,16 @@ function CartPage() {
               size="large"
               style={{ width: 220, height: 50 }}
               onClick={async () => {
-                // handleNavClick("/Confirmation");
-
+                if (!customerIsLoggedIn()) {
+                  sendToast("Please log in to place an order");
+                  navigate('/Login');
+                } else {
                 let submittedOrder = await submitOrder();
                 if (submittedOrder === 0) {
                 } else {
                   navigate("/confirmation", { state: { submittedOrder }});
                 }
-              }}
+              }}}
             >
               Confirm Purchase
             </Button>
